@@ -120,4 +120,10 @@ public class AuthServiceImpl implements AuthService {
         return view;
     }
 
+    @Override
+    public ModelAndView displayUserNav(String viewName) {
+        ModelAndView mav = new ModelAndView(viewName);
+        mav.addObject("username", this.getUser());
+        return mav;
+    }
 }

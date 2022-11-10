@@ -23,4 +23,6 @@ public interface AuthService {
     public String redirect(String viewName);
 
     public String requestRedirect();
+
+    public ModelAndView displayUserNav(String viewName);
 }

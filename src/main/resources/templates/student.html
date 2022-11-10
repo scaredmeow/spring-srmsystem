@@ -19,7 +19,7 @@
                 <button class="general-button button-1" formaction="https://docs.google.com/forms/u/0/">Submit a
                     Feedback</button>
             </form>
-            <h2>Previous Transactions of Juan Dela Cruz</h2>
+            <h2>Previous Transactions of <span th:text="${fullname}">Last Name, First Name Middle Name</span></h2>
             <table>
                 <tr class="h3">
                     <th>Document Name</th>
@@ -81,6 +81,7 @@
                     <td>Approved</td>
                     <td><button class="general-button button-1">Download</button></td>
                 </tr>
+
             </table>
 
         </section>
