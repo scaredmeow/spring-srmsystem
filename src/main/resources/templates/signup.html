@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="fragments.html :: head"></head>
+
+<body>
+    <header th:replace="fragments.html :: header"></header>
+
+    <main>
+        <aside>
+            <img src="img/trinity-portal-aside.png">
+        </aside>
+
+        <section>
+            <div class="container">
+                <img class="icon-logo" src="img/TUA-logo.png">
+                <div class="section-header">
+                    <h1>Hello, Guest</h1>
+                    <span class="body-1">Join the Trinitian Community! Sign up to gain access to trinity portal.</span>
+                </div>
+                <form class="account" th:action="@{/signup}" method="post">
+                    <input type="email" id="email" name="email" class="text-box body-2" placeholder="Email Address"
+                        required>
+                    <h4 th:if="${existsEmail}">Email already exists</h4>
+                    <input type="text" id="snumber" name="snumber" class="text-box body-2" placeholder="Student Number"
+                        required>
+                    <h4 th:if="${existsStudentNumber}">Student Number already exists</h4>
+                    <input type="text" id="fname" name="fname" class="text-box body-2" placeholder="First Name"
+                        required>
+                    <input type="text" id="mname" name="mname" class="text-box body-2" placeholder="Middle Name"
+                        required>
+                    <input type="text" id="lname" name="lname" class="text-box body-2" placeholder="Last Name" required>
+                    <input type="text" id="mnumber" name="mnumber" class="text-box body-2" placeholder="Mobile Number"
+                        required>
+                    <input type="text" id="username" name="username" class="text-box body-2" placeholder="Username"
+                        required>
+                    <h4 th:if="${existsUser}">Username already exists</h4>
+                    <input type="password" id="password" name="password" class="text-box body-2" placeholder="Password"
+                        required>
+                    <input type="password" id="cpassword" name="cpassword" class="text-box body-2"
+                        placeholder="Confirm Password" required>
+                    <h4 th:if="${errorConfirmPassword}=='error'">
+                        Password does not match</h4>
+                    <div class="form-buttons">
+                        <button class="general-button button-1">Sign Up</button>
+                    </div>
+                </form>
+                <span class="body-2 redirect">Have a trinity account? &nbsp<a th:href="@{/}">Login on your trinitian
+                        account
+                        now.</a></span>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <span class="body-1">Copyright © Trinity University of Asia. All rights reserved.</span>
+    </footer>
+</body>
+
+</html>

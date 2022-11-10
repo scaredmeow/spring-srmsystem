@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="fragments.html :: head"></head>
+
+<body>
+    <header th:replace="fragments.html :: header"></header>
+
+    <main>
+        <aside>
+            <img th:src="@{/img/trinity-portal-aside.png}">
+        </aside>
+
+        <section>
+            <div class="container">
+                <img class="icon-logo" th:src="@{/img/TUA-logo.png}">
+                <div class="section-header">
+                    <h1>Hello, Trinitian!</h1>
+                    <span class="body-1">Welcome back! Login to access or request for your latest university
+                        documents</span>
+                </div>
+                <form class="account" th:action="@{/}" method="post" id="singin-form">
+                    <h4 th:if="${param.error}">Invalid login credentials</h4>
+                    <input type="text" id="username" name="username" class="text-box body-2" placeholder="Username"
+                        required>
+                    <input type="password" id="password" name="password" class="text-box body-2" placeholder="Password"
+                        required>
+                    <div class="form-buttons">
+                        <button id="signIn" class="general-button button-1">Sign In</button>
+                    </div>
+                </form>
+                <span class="body-2 redirect">Currently a trinity student? &nbsp<a th:href="@{/signup}">Create your
+                        trinitian
+                        account
+                        now.</a></span>
+            </div>
+        </section>
+    </main>
+
+    <footer th:replace="fragments.html :: footer">
+    </footer>
+</body>
+
+</html>

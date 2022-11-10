@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="fragments.html :: head"></head>
+
+<body>
+    <header th:replace="fragments.html :: header"></header>
+
+    <main>
+        <section>
+            <img class="icon-logo" src="img/TUA-logo.png">
+            <div class="section-header">
+                <h1>Confirm your Request</h1>
+                <span class="body-1">Please double check your document request and upload your proof of payment through
+                    a google drive link.</span>
+            </div>
+            <h2>Request Receipt</h2>
+            <ul class="body-1">
+                <li> Transcript Of Records - P320.00 </li>
+                <li> Certificate of Good Moral Character - P130.00 </li>
+                <li> Certificate of Enrollment - P300.00 </li>
+                <li> Certificate of Graduation - P160.00 </li>
+                <li> Certificate of Transfer Credentials - P100.00 </li>
+            </ul>
+            <h3>Total - P1010</h3>
+            <div class="proof-of-payment">
+                <h2>Proof of Payment</h2>
+                <form>
+                    <input type="text" class="text-box body-2" placeholder="Google Drive Link" required>
+                    <button class="general-button button-1" formaction="student.html">Submit</button>
+                </form>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <span class="body-1">Copyright © Trinity University of Asia. All rights reserved.</span>
+    </footer>
+</body>
+
+</html>

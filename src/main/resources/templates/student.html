@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="fragments.html :: head"></head>
+
+<body>
+    <header th:replace="fragments.html :: header"></header>
+
+    <main>
+        <section>
+            <img class="icon-logo" th:src="@{/img/TUA-logo.png}">
+            <div class="section-header">
+                <h1>Student Document Request Portal</h1>
+                <span class="body-1">In need of a document? Request through the button below!</span>
+            </div>
+            <form class="request-buttons">
+                <button class="general-button button-1" th:formaction="@{/requests/student/new}">Request a
+                    Document</button>
+                <button class="general-button button-1" formaction="https://docs.google.com/forms/u/0/">Submit a
+                    Feedback</button>
+            </form>
+            <h2>Previous Transactions of Juan Dela Cruz</h2>
+            <table>
+                <tr class="h3">
+                    <th>Document Name</th>
+                    <th>Date Requested</th>
+                    <th>Document Status</th>
+                    <th>Document Action</th>
+                </tr>
+                <tr class="body-1">
+                    <td>Student ID</td>
+                    <td>Student ID</td>
+                    <td>Approved</td>
+                    <td><button class="general-button button-1">Download</button></td>
+                </tr>
+                <tr class="body-1">
+                    <td>Student ID</td>
+                    <td>Student ID</td>
+                    <td>Approved</td>
+                    <td><button class="general-button button-1">Download</button></td>
+                </tr>
+                <tr class="body-1">
+                    <td>Student ID</td>
+                    <td>Student ID</td>
+                    <td>Approved</td>
+                    <td><button class="general-button button-1">Download</button></td>
+                </tr>
+                <tr class="body-1">
+                    <td>Student ID</td>
+                    <td>Student ID</td>
+                    <td>Approved</td>
+                    <td><button class="general-button button-1">Download</button></td>
+                </tr>
+                <tr class="body-1">
+                    <td>Student ID</td>
+                    <td>Student ID</td>
+                    <td>Approved</td>
+                    <td><button class="general-button button-1">Download</button></td>
+                </tr>
+                <tr class="body-1">
+                    <td>Student ID</td>
+                    <td>Student ID</td>
+                    <td>Approved</td>
+                    <td><button class="general-button button-1">Download</button></td>
+                </tr>
+                <tr class="body-1">
+                    <td>Student ID</td>
+                    <td>Student ID</td>
+                    <td>Approved</td>
+                    <td><button class="general-button button-1">Download</button></td>
+                </tr>
+                <tr class="body-1">
+                    <td>Student ID</td>
+                    <td>Student ID</td>
+                    <td>Approved</td>
+                    <td><button class="general-button button-1">Download</button></td>
+                </tr>
+                <tr class="body-1">
+                    <td>Student ID</td>
+                    <td>Student ID</td>
+                    <td>Approved</td>
+                    <td><button class="general-button button-1">Download</button></td>
+                </tr>
+            </table>
+
+        </section>
+    </main>
+
+    <footer>
+        <span class="body-1">Copyright © Trinity University of Asia. All rights reserved.</span>
+    </footer>
+</body>
+
+</html>

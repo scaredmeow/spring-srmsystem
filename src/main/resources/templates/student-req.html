@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="fragments.html :: head"></head>
+
+<body>
+    <header th:replace="fragments.html :: header"></header>
+
+    <main>
+        <section>
+            <img class="icon-logo" src="img/TUA-logo.png">
+            <div class="section-header">
+                <h1>Student Document Request Portal</h1>
+                <span class="body-1">Fill up the form to request for your document!</span>
+            </div>
+            <div class="document-request">
+                <h2>Document Request</h2>
+                <span class="body-1">Please select from the list the documents you are requesting for:</span>
+                <form>
+                    <input type="checkbox" id="document-request" name="doc-hd" value="doc-hd">
+                    <label for="doc-hd" class="body-1">Honorable Dismissal / Transfer Credential</label><br>
+                    <input type="checkbox" id="document-request" name="doc-tor-grad" value="doc-tor-grad">
+                    <label for="doc-tor-grad" class="body-1">Transcript of Record(Graduate)</label>
+                    <input type="checkbox" id="document-request" name="doc-tor-undergrad" value="doc-tor-undergrad">
+                    <label for="doc-tor-undergrad" class="body-1">TOR Undergraduate, pls. specify year level</label>
+                    <input type="number" class="text-input body-1 input-number"><br>
+                    <input type="checkbox" id="document-request" name="doc-diploma-first" value="doc-diploma-first">
+                    <label for="doc-diploma-first" class="body-1">Diploma 1st copy</label>
+                    <input type="checkbox" id="document-request" name="doc-diploma-succeeding"
+                        value="doc-diploma-succeeding">
+                    <label for="doc-diploma-succeeding" class="body-1">Diploma 2nd / succeeding copy</label><br>
+                    <input type="checkbox" id="document-request" name="doc-certification" value="doc-certification">
+                    <label for="doc-certification" class="body-1">Certification (Please Specify)</label>
+                    <div class="doc-certification">
+                        <input type="checkbox" id="document-request" name="doc-certification-grad"
+                            value="doc-certification-grad">
+                        <label for="doc-certification-grad" class="body-1">Graduate</label>
+                        <input type="checkbox" id="document-request" name="doc-certification-moi"
+                            value="doc-certification-moi">
+                        <label for="doc-certification-moi" class="body-1">Medium of Instruction</label>
+                        <input type="checkbox" id="document-request" name="doc-certification-ched"
+                            value="doc-certification-ched">
+                        <label for="doc-certification-ched" class="body-1">CHED Authentication</label>
+                        <input type="checkbox" id="document-request" name="doc-certification-DFA"
+                            value="doc-certification-DFA">
+                        <label for="doc-certification-DFA" class="body-1">Red Ribbon DFA</label>
+                        <input type="checkbox" id="document-request" name="doc-certification-visa"
+                            value="doc-certification-visa">
+                        <label for="doc-certification-visa" class="body-1">Visa Extension</label> <br>
+                        <input type="checkbox" id="document-request" name="doc-certification-ctc"
+                            value="doc-certification-ctc">
+                        <label for="doc-certification-ctc" class="body-1">Certified True Copy (please specify the
+                            document/s)</label>
+                        <input type="text" class="text-input body-1"><br>
+                        <input type="checkbox" id="document-request" name="doc-certification-sd"
+                            value="doc-certification-sd">
+                        <label for="doc-certification-sd" class="body-1">Subject Description(please specify the
+                            subject/s)</label>
+                        <input type="text" class="text-input body-1"><br>
+                        <input type="checkbox" id="document-request" name="doc-certification-enroll"
+                            value="doc-certification-enroll">
+                        <label for="doc-certification-enroll" class="body-1">Enrollment (please specify in your letter
+                            the purpose of your application)</label><br>
+                        <input type="checkbox" id="document-request" name="doc-certification-gwa"
+                            value="doc-certification-gwa">
+                        <label for="doc-certification-gwa" class="body-1">General Weighted Average (for undergraduates,
+                            please specify in your letter
+                            the purpose of your application)</label><br>
+                    </div>
+                    <input type="checkbox" id="document-request" name="doc-certification-others"
+                        value="doc-certification-others">
+                    <label for="doc-certification-others" class="body-1">Others</label>
+                    <input type="text" class="text-input body-1"> <span class="body-1">Pls. indicate fee /
+                        amount </span><input type="text" class="text-input body-1"> <br>
+                    <button class="general-button button-1" formaction="student-req-receipt.html">Submit</button>
+                </form>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <span class="body-1">Copyright © Trinity University of Asia. All rights reserved.</span>
+    </footer>
+</body>
+
+</html>

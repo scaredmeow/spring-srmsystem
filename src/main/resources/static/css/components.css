@@ -1,0 +1,104 @@
+/* button style */
+button {
+  cursor: pointer;
+  transition: opacity 0.15s, background-color 0.15s, color 0.15s;
+  height: 1.875rem;
+  vertical-align: top;
+  border: 0px;
+  border-radius: 8px;
+  padding: 0 1rem;
+}
+
+button:active {
+  opacity: 0.8;
+}
+
+.reg-button {
+  background-color: transparent;
+  color: var(--global-white);
+  border: 2px solid var(--global-white);
+}
+
+.reg-button-filled {
+  background-color: var(--global-white);
+  color: var(--global-foreground-color);
+  margin-left: 0.5rem;
+}
+
+.general-button {
+  background-color: var(--global-foreground-color);
+  color: var(--global-background-color);
+  border-radius: 4px;
+}
+
+.reg-button:hover {
+  background-color: var(--global-action-color);
+  color: var(--global-foreground-color);
+  border: 2px solid var(--global-action-color);
+}
+
+.reg-button-filled:hover {
+  background-color: var(--global-action-color);
+}
+
+.general-button:hover {
+  background-color: #067c06;
+}
+
+/* Input Components */
+::placeholder {
+  opacity: 0.75;
+}
+
+.text-box {
+  border: 1px solid var(--global-black);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  color: var(--global-foreground-color);
+}
+
+.text-input {
+  border: 0px;
+  border-bottom: 1px solid var(--global-foreground-color);
+  background-color: transparent;
+  color: var(--global-foreground-color);
+  width: 8rem;
+}
+.text-input::placeholder {
+  opacity: 1;
+  color: var(--global-foreground-color);
+}
+
+.input-number {
+  width: 1.5rem;
+}
+
+.text-box:focus,
+.text-input:focus {
+  outline-width: 0;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+/* Table Components */
+table,
+th,
+td {
+  border: 2px solid var(--global-foreground-color);
+  border-collapse: collapse;
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+a {
+  color: var(--global-foreground-color);
+  font-weight: 600;
+}

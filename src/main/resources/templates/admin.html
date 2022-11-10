@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="fragments.html :: head"></head>
+
+<body>
+    <header th:replace="fragments.html :: header"></header>
+
+    <main>
+        <section>
+            <img class="icon-logo" src="img/TUA-logo.png">
+            <div class="section-header">
+                <h1>Student Request Management</h1>
+                <span class="body-1">Check the pending requests and do necessary request management</span>
+            </div>
+            <div class="student-request">
+                <div class="check-request">
+                    <h2>Check a Request</h2>
+                    <span class="body-1">To check a specific request please enter a specific student number and to check
+                        all
+                        of the pending request just leave the student number blank.</span> <br><br>
+                    <span class="h3">Student Number: </span><input type="text" class="text-box body-1"
+                        placeholder="Student Number"> <button class="general-button button-1">Check a Request</button>
+                </div>
+                <div class="manage-request">
+                    <h2>Request Information</h2>
+                    <span class="body-1">Double check all of the information through the table below</span><br><br>
+                    <h3>2019032102 Juan B. Dela Cruz</h3>
+                    <table>
+                        <tr class="h3">
+                            <th>Document Request</th>
+                            <th>Date Requested</th>
+                            <th>Request Status</th>
+                            <th>Check a Request</th>
+                            <th>Edit a Request</th>
+                        </tr>
+                        <tr class="body-1">
+                            <td>TOR</td>
+                            <td>12/03/2016</td>
+                            <td>Pending</td>
+                            <td><button class="general-button button-1">Check</button></td>
+                            <td><button class="general-button button-1">Edit</button></td>
+                        </tr>
+                        <tr class="body-1">
+                            <td>TOR</td>
+                            <td>12/03/2016</td>
+                            <td>Pending</td>
+                            <td><button class="general-button button-1">Check</button></td>
+                            <td><button class="general-button button-1">Edit</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="request-details">
+                    <form class="form-fields">
+                        <div class="left">
+                            <div>
+                                <label class="body-1">Date Requested:</label>
+                                <input type="date" class="text-box body-2">
+                            </div>
+                            <div>
+                                <label class="body-1">Date Checked:</label>
+                                <input type="date" class="text-box body-2">
+                            </div>
+
+                            <div>
+                                <label class="body-1">Date of Received for Printing: </label>
+                                <input type="date" class="text-box body-2">
+                            </div>
+
+
+                        </div>
+                        <div class="right">
+                            <div>
+                                <label class="body-1">Due Date:</label>
+                                <input type="date" class="text-box body-2">
+                            </div>
+
+                            <div><label class="body-1">Date Approved by Registrar:</label>
+                                <input type="date" class="text-box body-2">
+                            </div>
+
+                            <div> <label class="body-1">Date Printed:</label>
+                                <input type="date" class="text-box body-2">
+                            </div>
+
+                        </div>
+
+
+                    </form>
+                    <form class="form-buttons">
+                        <button class="general-button button-1">Print Request</button>
+                        <button class="general-button button-1">Add</button>
+                        <button class="general-button button-1">Save</button>
+                        <button class="general-button button-1" formaction="admin-report.html">Reports</button>
+                    </form>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <span class="body-1">Copyright © Trinity University of Asia. All rights reserved.</span>
+    </footer>
+</body>
+
+</html>

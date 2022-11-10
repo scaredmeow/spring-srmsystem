@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="fragments.html :: head"></head>
+
+<body>
+    <header th:replace="fragments.html :: header"></header>
+
+    <main>
+        <section>
+            <img class="icon-logo" src="img/TUA-logo.png">
+            <div class="section-header">
+                <h1>Student Request Management</h1>
+                <span class="body-1">Check all of the request from pending up to completed.</span>
+            </div>
+            <form>
+                <span class="h3">From: </span><input type="date"> <span class="h3"> To: </span>
+                <input type="date">
+            </form>
+            <table class="admin-report">
+                <tr class="h3">
+                    <th>Student Number</th>
+                    <th>Student Name</th>
+                    <th>Document Request</th>
+                    <th>Date Requested</th>
+                    <th>Request Status</th>
+                    <th>Check a Request</th>
+                </tr>
+                <tr class="body-1">
+                    <td>2019032102</td>
+                    <td>Juan B. Dela Cruz</td>
+                    <td>TOR</td>
+                    <td>12/03/2016</td>
+                    <td>Pending</td>
+                    <td><button class="general-button button-1">Check</button></td>
+                </tr>
+                <tr class="body-1">
+                    <td>2019032102</td>
+                    <td>Juan B. Dela Cruz</td>
+                    <td>TOR</td>
+                    <td>12/03/2016</td>
+                    <td>Pending</td>
+                    <td><button class="general-button button-1">Check</button></td>
+                </tr>
+                <tr class="body-1">
+                    <td>2019032102</td>
+                    <td>Juan B. Dela Cruz</td>
+                    <td>TOR</td>
+                    <td>12/03/2016</td>
+                    <td>Pending</td>
+                    <td><button class="general-button button-1">Check</button></td>
+                </tr>
+                <tr class="body-1">
+                    <td>2019032102</td>
+                    <td>Juan B. Dela Cruz</td>
+                    <td>TOR</td>
+                    <td>12/03/2016</td>
+                    <td>Pending</td>
+                    <td><button class="general-button button-1">Check</button></td>
+                </tr>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <span class=" body-1">Copyright © Trinity University of Asia. All rights reserved.</span>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="fragments.html :: head"></head>
+
+<body>
+    <header th:replace="fragments.html :: header"></header>
+
+    <main>
+        <aside>
+            <img th:src="@{/img/trinity-portal-aside.png}">
+        </aside>
+
+        <section>
+            <h2>There is an Error in your request!</h2>
+        </section>
+    </main>
+
+    <footer th:replace="fragments.html :: footer">
+    </footer>
+</body>
+
+</html>
