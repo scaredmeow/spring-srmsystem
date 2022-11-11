@@ -16,13 +16,9 @@
             </div>
             <h2>Request Receipt</h2>
             <ul class="body-1">
-                <li> Transcript Of Records - P320.00 </li>
-                <li> Certificate of Good Moral Character - P130.00 </li>
-                <li> Certificate of Enrollment - P300.00 </li>
-                <li> Certificate of Graduation - P160.00 </li>
-                <li> Certificate of Transfer Credentials - P100.00 </li>
+                <li th:each="document: ${document}"> <span th:text="${document.name} +' - '+${document.price}"></li>
             </ul>
-            <h3>Total - P1010</h3>
+            <h3>Total - P<span th:text="${total}"></span></h3>
             <div class="proof-of-payment">
                 <h2>Proof of Payment</h2>
                 <form>
