@@ -27,61 +27,17 @@
                     <th>Document Status</th>
                     <th>Document Action</th>
                 </tr>
-                <tr class="body-1">
-                    <td>Student ID</td>
-                    <td>Student ID</td>
-                    <td>Approved</td>
-                    <td><button class="general-button button-1">Download</button></td>
-                </tr>
-                <tr class="body-1">
-                    <td>Student ID</td>
-                    <td>Student ID</td>
-                    <td>Approved</td>
-                    <td><button class="general-button button-1">Download</button></td>
-                </tr>
-                <tr class="body-1">
-                    <td>Student ID</td>
-                    <td>Student ID</td>
-                    <td>Approved</td>
-                    <td><button class="general-button button-1">Download</button></td>
-                </tr>
-                <tr class="body-1">
-                    <td>Student ID</td>
-                    <td>Student ID</td>
-                    <td>Approved</td>
-                    <td><button class="general-button button-1">Download</button></td>
-                </tr>
-                <tr class="body-1">
-                    <td>Student ID</td>
-                    <td>Student ID</td>
-                    <td>Approved</td>
-                    <td><button class="general-button button-1">Download</button></td>
-                </tr>
-                <tr class="body-1">
-                    <td>Student ID</td>
-                    <td>Student ID</td>
-                    <td>Approved</td>
-                    <td><button class="general-button button-1">Download</button></td>
-                </tr>
-                <tr class="body-1">
-                    <td>Student ID</td>
-                    <td>Student ID</td>
-                    <td>Approved</td>
-                    <td><button class="general-button button-1">Download</button></td>
-                </tr>
-                <tr class="body-1">
-                    <td>Student ID</td>
-                    <td>Student ID</td>
-                    <td>Approved</td>
-                    <td><button class="general-button button-1">Download</button></td>
-                </tr>
-                <tr class="body-1">
-                    <td>Student ID</td>
-                    <td>Student ID</td>
-                    <td>Approved</td>
-                    <td><button class="general-button button-1">Download</button></td>
-                </tr>
+                <tr class="body-1" th:each="transactions: ${transactions}">
+                    <td><span th:text="'Transaction ID: '+ ${transactions.TID}">Name</span></td>
+                    <td><span th:text="${transactions.created_at}">Student ID</span></td>
+                    <td><span th:text="${transactions.status}">Approved</span></td>
+                    <td>
+                        <form th:action="'/requests/student/' + ${transactions.TID}" method="post">
+                            <button class="general-button button-1">Download</button>
+                        </form>
 
+                    </td>
+                </tr>
             </table>
 
         </section>

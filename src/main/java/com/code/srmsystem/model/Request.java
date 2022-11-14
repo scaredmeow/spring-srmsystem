@@ -25,24 +25,24 @@ public class Request {
         return RID;
     }
 
-    public void setRID(int rID) {
-        RID = rID;
+    public void setRID(int RID) {
+        this.RID = RID;
     }
 
     public int getTID() {
         return TID;
     }
 
-    public void setTID(int tID) {
-        TID = tID;
+    public void setTID(int TID) {
+        this.TID = TID;
     }
 
     public int getDID() {
         return DID;
     }
 
-    public void setDID(int dID) {
-        DID = dID;
+    public void setDID(int DID) {
+        this.DID = DID;
     }
 
     public String getUpdated_at() {

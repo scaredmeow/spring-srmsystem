@@ -64,8 +64,8 @@ public class User {
         return UID;
     }
 
-    public void setUID(int uID) {
-        UID = uID;
+    public void setUID(int UID) {
+        this.UID = UID;
     }
 
     public String getUsername() {

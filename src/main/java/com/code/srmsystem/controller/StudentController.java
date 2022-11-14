@@ -3,6 +3,7 @@ package com.code.srmsystem.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,8 +40,23 @@ public class StudentController {
     }
 
     @PostMapping(path = "/new")
-    public ModelAndView trial(@RequestParam("doc") String[] requests, Model model) {
+    public ModelAndView postNewTrans(@RequestParam("doc") String[] requests, Model model) {
         return this.studentService.createTransaction(requests, "student-req", model);
+    }
+
+    @PostMapping(path = "/{TID}")
+    public ModelAndView postUnpaidTrans(@PathVariable("TID") int TID) {
+        return this.studentService.updateTransaction(TID, "student-req-receipt");
+    }
+
+    @PostMapping(path = "/new/submit")
+    public ModelAndView postSubmitTrans(@RequestParam("payment") String payment) {
+        return this.studentService.submitTransaction(payment, "redirect:/requests");
+    }
+
+    @PostMapping(path = "/{TID}/submit")
+    public ModelAndView postSpecificTrans(@RequestParam("payment") String payment, @PathVariable("TID") int TID) {
+        return this.studentService.submitSpecificTransaction(payment, TID, "redirect:/requests");
     }
 
 }

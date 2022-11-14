@@ -21,9 +21,11 @@
             <h3>Total - P<span th:text="${total}"></span></h3>
             <div class="proof-of-payment">
                 <h2>Proof of Payment</h2>
-                <form>
-                    <input type="text" class="text-box body-2" placeholder="Google Drive Link" required>
-                    <button class="general-button button-1" formaction="student.html">Submit</button>
+                <form method="post" th:action="@{/requests/student/new/submit}">
+                    <input type="text" name="payment" class="text-box body-2" placeholder="Google Drive Link" required>
+                    <button class="general-button button-1" th:unless="${noTID}">Submit</button>
+                    <button class="general-button button-1" th:if="${noTID}"
+                        th:formaction="@{'/requests/student/'+${TID}+'/submit'}">Submit</button>
                 </form>
             </div>
 

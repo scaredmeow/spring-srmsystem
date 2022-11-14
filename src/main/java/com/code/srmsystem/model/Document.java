@@ -25,8 +25,8 @@ public class Document {
         return DID;
     }
 
-    public void setDID(int dID) {
-        DID = dID;
+    public void setDID(int DID) {
+        this.DID = DID;
     }
 
     public float getPrice() {
