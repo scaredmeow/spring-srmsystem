@@ -45,6 +45,16 @@ button:active {
   background-color: #067c06;
 }
 
+.error-general-button {
+  background-color: var(--global-error-color);
+  color: var(--global-white);
+  border-radius: 4px;
+}
+
+.error-general-button:hover {
+  background-color: var(--global-error-hover-color);
+}
+
 /* Input Components */
 ::placeholder {
   opacity: 0.75;

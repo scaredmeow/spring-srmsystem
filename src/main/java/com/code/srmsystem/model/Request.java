@@ -13,6 +13,24 @@ public class Request {
     private String status;
     private String name;
     private String created_at;
+    private String student_number;
+    private String payment;
+
+    public String getPayment() {
+        return payment;
+    }
+
+    public void setPayment(String payment) {
+        this.payment = payment;
+    }
+
+    public String getStudent_number() {
+        return student_number;
+    }
+
+    public void setStudent_number(String student_number) {
+        this.student_number = student_number;
+    }
 
     public String getCreated_at() {
         return created_at;
@@ -25,7 +43,8 @@ public class Request {
     public Request() {
     }
 
-    public Request(int RID, int TID, int DID, Timestamp updated_at, String status, String name, String created_at) {
+    public Request(int RID, int TID, int DID, Timestamp updated_at, String status, String name, String created_at,
+            String student_number, String payment) {
         this.RID = RID;
         this.TID = TID;
         this.DID = DID;
@@ -33,6 +52,8 @@ public class Request {
         this.status = status;
         this.name = name;
         this.created_at = created_at;
+        this.student_number = student_number;
+        this.payment = payment;
     }
 
     public int getRID() {

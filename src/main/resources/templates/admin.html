@@ -8,7 +8,7 @@
 
     <main>
         <section>
-            <img class="icon-logo" src="img/TUA-logo.png">
+            <img class="icon-logo" th:src="@{/img/TUA-logo.png}">
             <div class="section-header">
                 <h1>Student Request Management</h1>
                 <span class="body-1">Check the pending requests and do necessary request management</span>
@@ -16,16 +16,45 @@
             <div class="student-request">
                 <div class="check-request">
                     <h2>Check a Request</h2>
-                    <span class="body-1">To check a specific request please enter a specific student number and to check
-                        all
-                        of the pending request just leave the student number blank.</span> <br><br>
-                    <span class="h3">Student Number: </span><input type="text" class="text-box body-1"
-                        placeholder="Student Number"> <button class="general-button button-1">Check a Request</button>
+                    <span class="body-1">To check a specific request please enter a specific student number</span>
+                    <br><br>
+                    <span class="h3">Student Number: </span>
+                    <form th:action="@{/requests/admin/search}" method="post">
+                        <input type="text" name="snumber" class="text-box body-1" placeholder="Student Number">
+                        <button class="general-button button-1">Check a Request</button>
+                    </form>
+                    <h3><span th:text="${errorSnumber}"></span></h3>
                 </div>
-                <div class="manage-request">
+                <div class="manage-request" th:if="${noTable}">
+                    <h2>Request Information</h2>
+                    <!-- <span class="body-1">Latest Tranasctions</span><br><br> -->
+                    <h3>Ongoing Transactions</h3>
+                    <table>
+                        <tr class="h3">
+                            <th>Student Number</th>
+                            <th>Document Request</th>
+                            <th>Date Requested</th>
+                            <th>Request Status</th>
+                            <th>Document Action</th>
+                        </tr>
+                        <tr class="body-1" th:each="requests: ${requests}">
+                            <td><span th:text="${requests.student_number}">202212345</span></td>
+                            <td><span th:text="${requests.name}">TOR</span></td>
+                            <td><span th:text="${requests.created_at}">12/12/2012</span></td>
+                            <td><span th:text="${requests.status}">pending</span></td>
+                            <td>
+                                <form th:action="@{/requests/admin/check/} + ${requests.RID}" method="get">
+                                    <button class="general-button button-1">Check</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="manage-request" th:unless="${noTable}">
                     <h2>Request Information</h2>
                     <span class="body-1">Double check all of the information through the table below</span><br><br>
-                    <h3>2019032102 Juan B. Dela Cruz</h3>
+                    <h3><span th:text="${snumber} +' - ' + ${fullname}"> 202212345 - Juan B. Dela Cruz
+                        </span> </h3>
                     <table>
                         <tr class="h3">
                             <th>Document Request</th>
@@ -34,23 +63,20 @@
                             <th>Check a Request</th>
                             <th>Edit a Request</th>
                         </tr>
-                        <tr class="body-1">
-                            <td>TOR</td>
-                            <td>12/03/2016</td>
-                            <td>Pending</td>
-                            <td><button class="general-button button-1">Check</button></td>
-                            <td><button class="general-button button-1">Edit</button></td>
-                        </tr>
-                        <tr class="body-1">
-                            <td>TOR</td>
-                            <td>12/03/2016</td>
-                            <td>Pending</td>
-                            <td><button class="general-button button-1">Check</button></td>
-                            <td><button class="general-button button-1">Edit</button></td>
+                        <tr class="body-1" th:each="requests: ${requests}">
+                            <td><span th:text="${requests.student_number}">202212345</span></td>
+                            <td><span th:text="${requests.name}">TOR</span></td>
+                            <td><span th:text="${requests.created_at}">12/12/2012</span></td>
+                            <td><span th:text="${requests.status}">pending</span></td>
+                            <td>
+                                <form th:action="@{/requests/admin/check/} + ${requests.RID}" method="get">
+                                    <button class="general-button button-1">Check</button>
+                                </form>
+                            </td>
                         </tr>
                     </table>
                 </div>
-                <div class="request-details">
+                <!-- <div class="request-details" th:unless="${noTable}">
                     <form class="form-fields">
                         <div class="left">
                             <div>
@@ -87,13 +113,13 @@
 
 
                     </form>
-                    <form class="form-buttons">
+                    <form class="form-buttons" th:action="@{/requests/admin/reports}" method="get">
                         <button class="general-button button-1">Print Request</button>
                         <button class="general-button button-1">Add</button>
                         <button class="general-button button-1">Save</button>
-                        <button class="general-button button-1" formaction="admin-report.html">Reports</button>
+                        <button class="general-button button-1">Reports</button>
                     </form>
-                </div>
+                </div> -->
             </div>
 
         </section>

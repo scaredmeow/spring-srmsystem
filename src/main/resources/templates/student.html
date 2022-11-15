@@ -19,7 +19,7 @@
                 <button class="general-button button-1" formaction="https://docs.google.com/forms/u/0/">Submit a
                     Feedback</button>
             </form>
-            <h2>Previous Transactions of <span th:text="${fullname}">Last Name, First Name Middle Name</span></h2>
+            <h2>Unpaid Transactions of <span th:text="${fullname}">Last Name, First Name Middle Name</span></h2>
             <table>
                 <tr class="h3">
                     <th>Document Name</th>
@@ -38,15 +38,21 @@
 
                     </td>
                 </tr>
+            </table>
+            <h2>Ongoing and Past Transactions of <span th:text="${fullname}">Last Name, First Name Middle Name</span>
+            </h2>
+            <table>
+                <tr class="h3">
+                    <th>Document Name</th>
+                    <th>Date Requested</th>
+                    <th>Last Update</th>
+                    <th>Document Status</th>
+                </tr>
                 <tr class="body-1" th:each="requests: ${requests}">
                     <td><span th:text="${requests.name}">Name</span></td>
                     <td><span th:text="${requests.created_at}">Student ID</span></td>
+                    <td><span th:text="${requests.updated_at}">Updated At</span></td>
                     <td><span th:text="${requests.status}">Approved</span></td>
-                    <td>
-                        <form th:action="'/requests/student/view/' + ${requests.RID}" method="post">
-                            <button class="general-button button-1">View</button>
-                        </form>
-                    </td>
                 </tr>
             </table>
 

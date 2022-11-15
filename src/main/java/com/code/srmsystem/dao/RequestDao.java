@@ -13,4 +13,12 @@ public interface RequestDao {
     public boolean createLatestRequests(Request request);
 
     public List<Request> getAllRequests();
+
+    public List<Request> getRecentRequests();
+
+    public List<Request> getSpecificRequests(String snumber);
+
+    public Request getRequest(int RID);
+
+    public boolean updateRequest(int RID, String method);
 }

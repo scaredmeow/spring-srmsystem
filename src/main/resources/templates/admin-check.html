@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="fragments.html :: head"></head>
+
+<body>
+    <header th:replace="fragments.html :: header"></header>
+
+    <main>
+        <section>
+            <img class="icon-logo" th:src="@{/img/TUA-logo.png}">
+            <div class="section-header">
+                <h1>Student Request Management</h1>
+                <span class="body-1">Check the pending requests and do necessary request management</span>
+            </div>
+            <div class="student-request">
+                <div class="manage-request">
+                    <h2>Request Information</h2> <br><br>
+                    <h3 th:text="${snumber} +' - ' + ${fullname}"></h3>
+                    <table>
+                        <tr class="h3">
+                            <th>Document Request</th>
+                            <th>Date Requested</th>
+                            <th>Last Updated</th>
+                            <th>Payment Link</th>
+                            <th>Request Status</th>
+                        </tr>
+                        <tr class="body-1" th:each="requests: ${requests}">
+                            <td><span th:text="${requests.name}"></span></td>
+                            <td><span th:text="${requests.created_at}"></span></td>
+                            <td><span th:text="${requests.updated_at}"></span></td>
+                            <td><span th:text="${requests.payment}"></span></td>
+                            <td><span th:text="${requests.status}"></span></td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- <div class="request-details" th:unless="${noTable}">
+                    <form class="form-fields">
+                        <div class="left">
+                            <div>
+                                <label class="body-1">Date Requested:</label>
+                                <input type="date" class="text-box body-2">
+                            </div>
+                            <div>
+                                <label class="body-1">Date Checked:</label>
+                                <input type="date" class="text-box body-2">
+                            </div>
+
+                            <div>
+                                <label class="body-1">Date of Received for Printing: </label>
+                                <input type="date" class="text-box body-2">
+                            </div>
+
+
+                        </div>
+                        <div class="right">
+                            <div>
+                                <label class="body-1">Due Date:</label>
+                                <input type="date" class="text-box body-2">
+                            </div>
+
+                            <div><label class="body-1">Date Approved by Registrar:</label>
+                                <input type="date" class="text-box body-2">
+                            </div>
+
+                            <div> <label class="body-1">Date Printed:</label>
+                                <input type="date" class="text-box body-2">
+                            </div>
+
+                        </div>
+
+
+                    </form>
+                    <form class="form-buttons" th:action="@{/requests/admin/reports}" method="get">
+                        <button class="general-button button-1">Print Request</button>
+                        <button class="general-button button-1">Add</button>
+                        <button class="general-button button-1">Save</button>
+                        <button class="general-button button-1">Reports</button>
+                    </form>
+                </div> -->
+                <div class="request-details">
+                    <form class="form-buttons2" th:action="@{/requests/admin/check}" method="post">
+                        <button class="error-general-button button-1" th:formaction="@{/requests/admin}"
+                            th:formmethod="get">Back</button>
+                        <button class="error-general-button button-1"
+                            th:formaction="@{/requests/admin/check/} + ${RID} + '/reject'">Reject</button>
+                        <button class="general-button button-1"
+                            th:formaction="@{/requests/admin/check/} + ${RID} + '/receive'">Receive</button>
+                        <button class="general-button button-1"
+                            th:formaction="@{/requests/admin/check/} + ${RID} + '/approve'">Approve</button>
+                        <button class="general-button button-1"
+                            th:formaction="@{/requests/admin/check/} + ${RID} + '/print'">Print</button>
+                        <button class="general-button button-1"
+                            th:formaction="@{/requests/admin/check/} + ${RID} + '/complete'">Complete</button>
+                    </form>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <span class="body-1">Copyright © Trinity University of Asia. All rights reserved.</span>
+    </footer>
+</body>
+
+</html>

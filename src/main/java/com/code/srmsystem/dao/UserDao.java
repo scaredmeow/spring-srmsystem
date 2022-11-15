@@ -12,6 +12,8 @@ public interface UserDao {
 
     public User findByUserID(int UID);
 
+    public User findByStudentNumber(String student_number);
+
     public boolean saveUserRegistration(User user);
 
     public boolean existsEmail(String email);

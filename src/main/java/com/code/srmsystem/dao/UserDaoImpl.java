@@ -93,4 +93,10 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    @Override
+    public User findByStudentNumber(String student_number) {
+        String sql = "SELECT * FROM users WHERE student_number = '" + student_number + "'";
+        return jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(User.class));
+    }
+
 }
