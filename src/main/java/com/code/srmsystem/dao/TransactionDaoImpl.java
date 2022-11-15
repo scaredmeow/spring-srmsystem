@@ -83,4 +83,10 @@ public class TransactionDaoImpl implements TransactionDao {
                 TID) == 1;
     }
 
+    @Override
+    public int getLatestTransactionID() {
+        String sql = "SELECT T.TID FROM transactions as T ORDER BY created_at DESC LIMIT 1";
+        return jdbcTemplate.queryForObject(sql, int.class);
+    }
+
 }

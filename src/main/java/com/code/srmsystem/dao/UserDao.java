@@ -6,7 +6,6 @@ import com.code.srmsystem.model.User;
 
 @Component
 public interface UserDao {
-
     public User loginByUserName(String username);
 
     public User findByUserName(String username);

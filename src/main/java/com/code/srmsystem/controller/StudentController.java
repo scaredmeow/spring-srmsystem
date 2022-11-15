@@ -34,14 +34,14 @@ public class StudentController {
         return this.authService.displayUserNav("student-req");
     }
 
-    @GetMapping(path = "/receipt")
-    public ModelAndView receiptPage() {
-        return this.authService.displayUserNav("student-req-receipt");
-    }
-
     @PostMapping(path = "/new")
     public ModelAndView postNewTrans(@RequestParam("doc") String[] requests, Model model) {
         return this.studentService.createTransaction(requests, "student-req", model);
+    }
+
+    @GetMapping(path = "/{TID}")
+    public String getUnpaidTransPage() {
+        return this.authService.requestRedirect();
     }
 
     @PostMapping(path = "/{TID}")
@@ -49,14 +49,24 @@ public class StudentController {
         return this.studentService.updateTransaction(TID, "student-req-receipt");
     }
 
+    @PostMapping(path = "/{TID}/submit")
+    public ModelAndView postSpecificTrans(@RequestParam("payment") String payment, @PathVariable("TID") int TID) {
+        return this.studentService.submitSpecificTransaction(payment, TID, "redirect:/requests");
+    }
+
+    @GetMapping(path = "/{TID}/submit")
+    public String getSpecificTransPage() {
+        return this.authService.requestRedirect();
+    }
+
     @PostMapping(path = "/new/submit")
     public ModelAndView postSubmitTrans(@RequestParam("payment") String payment) {
         return this.studentService.submitTransaction(payment, "redirect:/requests");
     }
 
-    @PostMapping(path = "/{TID}/submit")
-    public ModelAndView postSpecificTrans(@RequestParam("payment") String payment, @PathVariable("TID") int TID) {
-        return this.studentService.submitSpecificTransaction(payment, TID, "redirect:/requests");
+    @GetMapping(path = "/new/submit")
+    public String getSubmitTransPage() {
+        return this.authService.requestRedirect();
     }
 
 }

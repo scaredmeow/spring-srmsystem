@@ -1,5 +1,7 @@
 package com.code.srmsystem.model;
 
+import java.sql.Timestamp;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -7,18 +9,30 @@ public class Request {
     private int RID;
     private int TID;
     private int DID;
-    private String updated_at;
+    private Timestamp updated_at;
     private String status;
+    private String name;
+    private String created_at;
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
 
     public Request() {
     }
 
-    public Request(int RID, int TID, int DID, String updated_at, String status) {
+    public Request(int RID, int TID, int DID, Timestamp updated_at, String status, String name, String created_at) {
         this.RID = RID;
         this.TID = TID;
         this.DID = DID;
         this.updated_at = updated_at;
         this.status = status;
+        this.name = name;
+        this.created_at = created_at;
     }
 
     public int getRID() {
@@ -45,11 +59,11 @@ public class Request {
         this.DID = DID;
     }
 
-    public String getUpdated_at() {
+    public Timestamp getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(String updated_at) {
+    public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
 
@@ -61,13 +75,23 @@ public class Request {
         this.status = status;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "Post {RID=" + RID +
                 ", TID=" + TID +
                 ", DID=" + DID +
                 ", updated_at='" + updated_at + "\'" +
-                ", status='" + status + "\'" + "}";
+                ", status='" + status + "\'" +
+                ", name='" + name + "\'" +
+                ", created_at='" + created_at + "\'" + "}";
     }
 
 }

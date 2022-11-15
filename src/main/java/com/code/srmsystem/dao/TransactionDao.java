@@ -17,4 +17,6 @@ public interface TransactionDao {
     public List<Transaction> getUnpaidTransactions();
 
     public Transaction findByTransactionID(int TID);
+
+    public int getLatestTransactionID();
 }

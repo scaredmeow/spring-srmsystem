@@ -29,13 +29,23 @@
                 </tr>
                 <tr class="body-1" th:each="transactions: ${transactions}">
                     <td><span th:text="'Transaction ID: '+ ${transactions.TID}">Name</span></td>
-                    <td><span th:text="${transactions.created_at}">Student ID</span></td>
+                    <td><span th:text="${transactions.created_at}">Date Created</span></td>
                     <td><span th:text="${transactions.status}">Approved</span></td>
                     <td>
                         <form th:action="'/requests/student/' + ${transactions.TID}" method="post">
-                            <button class="general-button button-1">Download</button>
+                            <button class="general-button button-1">Pay Now</button>
                         </form>
 
+                    </td>
+                </tr>
+                <tr class="body-1" th:each="requests: ${requests}">
+                    <td><span th:text="${requests.name}">Name</span></td>
+                    <td><span th:text="${requests.created_at}">Student ID</span></td>
+                    <td><span th:text="${requests.status}">Approved</span></td>
+                    <td>
+                        <form th:action="'/requests/student/view/' + ${requests.RID}" method="post">
+                            <button class="general-button button-1">View</button>
+                        </form>
                     </td>
                 </tr>
             </table>

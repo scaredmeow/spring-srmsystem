@@ -10,17 +10,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.code.srmsystem.service.AuthService;
+
 // import com.code.srmsystem.service.AuthService;
 
 @Controller
 public class CustomErrorController implements ErrorController {
 
-    // private AuthService authService;
+    private AuthService authService;
 
-    // @Autowired
-    // public CustomErrorController(AuthService authService) {
-    // this.authService = authService;
-    // }
+    public CustomErrorController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @GetMapping("/error")
     public String handleError(HttpServletRequest request, Model model) {
@@ -30,6 +31,7 @@ public class CustomErrorController implements ErrorController {
 
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
+        model.addAttribute("username", this.authService.getUser());
         if (status != null) {
             Integer statusCode = Integer.valueOf(status.toString());
 

@@ -1,7 +1,10 @@
 package com.code.srmsystem.service;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.code.srmsystem.dao.DocumentDao;
+import com.code.srmsystem.dao.RequestDao;
 import com.code.srmsystem.dao.TransactionDao;
 import com.code.srmsystem.dao.UserDao;
 import com.code.srmsystem.model.Document;
+import com.code.srmsystem.model.Request;
 import com.code.srmsystem.model.Transaction;
 import com.code.srmsystem.model.User;
 
@@ -29,13 +34,15 @@ public class StudentServiceImpl implements StudentService {
     private UserDao userDao;
     private DocumentDao documentDao;
     private TransactionDao transactionDao;
+    private RequestDao requestDao;
 
     public StudentServiceImpl(AuthService authService, UserDao userDao, DocumentDao documentDao,
-            TransactionDao transactionDao) {
+            TransactionDao transactionDao, RequestDao requestDao) {
         this.authService = authService;
         this.userDao = userDao;
         this.documentDao = documentDao;
         this.transactionDao = transactionDao;
+        this.requestDao = requestDao;
 
     }
 
@@ -43,10 +50,12 @@ public class StudentServiceImpl implements StudentService {
     public ModelAndView displayUserandTransactions(String viewName) {
         ModelAndView mav = new ModelAndView(viewName);
         List<Transaction> transactions = this.transactionDao.getUnpaidTransactions();
+        List<Request> requests = this.requestDao.getAllRequests();
         user = this.userDao.findByUserName(this.authService.getUser());
         mav.addObject("username", user.getUsername());
         mav.addObject("fullname", user.getLast_name() + ", " + user.getFirst_name() + " " + user.getMiddle_name());
         mav.addObject("transactions", transactions);
+        mav.addObject("requests", requests);
         return mav;
     }
 
@@ -111,11 +120,33 @@ public class StudentServiceImpl implements StudentService {
         return mav;
     }
 
-    // TODO: AFTER SUBMITTING SPLIT IT INTO DIFFERENT REQUESTS
     @Override
     public ModelAndView submitTransaction(String payment, String viewName) {
         ModelAndView mav = new ModelAndView(viewName);
         this.transactionDao.updateLatestTransaction(payment);
+
+        Timestamp timestamp = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("MM dd yyyy hh:mm:ss");
+            Date date = new Date();
+            Date parsedDate = sdf.parse(sdf.format(date));
+            timestamp = new java.sql.Timestamp(parsedDate.getTime());
+        } catch (Exception e) {
+            // this generic but you can control the type of exception
+        }
+
+        transaction = this.transactionDao.findByTransactionID(this.transactionDao.getLatestTransactionID());
+
+        String[] requests = transaction.getDocuments().split(",");
+
+        for (int i = 0; i < requests.length; i++) {
+            Request request = new Request();
+            request.setTID(this.transactionDao.getLatestTransactionID());
+            request.setDID(Integer.parseInt(requests[i]));
+            request.setUpdated_at(timestamp);
+            this.requestDao.createLatestRequests(request);
+        }
+
         return mav;
     }
 
@@ -123,6 +154,26 @@ public class StudentServiceImpl implements StudentService {
     public ModelAndView submitSpecificTransaction(String payment, int TID, String viewName) {
         ModelAndView mav = new ModelAndView(viewName);
         this.transactionDao.updateSpecificTransaction(payment, TID);
+
+        Timestamp timestamp = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("MM dd yyyy hh:mm:ss");
+            Date date = new Date();
+            Date parsedDate = sdf.parse(sdf.format(date));
+            timestamp = new java.sql.Timestamp(parsedDate.getTime());
+        } catch (Exception e) {
+            // this generic but you can control the type of exception
+        }
+        transaction = this.transactionDao.findByTransactionID(TID);
+
+        String[] requests = transaction.getDocuments().split(",");
+        for (int i = 0; i < requests.length; i++) {
+            Request request = new Request();
+            request.setTID(TID);
+            request.setDID(Integer.parseInt(requests[i]));
+            request.setUpdated_at(timestamp);
+            this.requestDao.createRequests(request);
+        }
         return mav;
     }
 
