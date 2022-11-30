@@ -19,7 +19,7 @@
 -- Table structure for table `documents`
 --
 
-use heroku_9de761e705435a5;
+use srmystem;
 
 DROP TABLE IF EXISTS `documents`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
