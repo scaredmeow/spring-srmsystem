@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.code.srmsystem.service.AdminService;
-import com.code.srmsystem.service.AuthService;
 
 @Controller
 @RequestMapping(path = "/requests/admin")
