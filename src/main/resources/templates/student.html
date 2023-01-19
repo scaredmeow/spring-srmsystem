@@ -26,6 +26,7 @@
                     <th>Date Requested</th>
                     <th>Document Status</th>
                     <th>Document Action</th>
+                    <th>Cancel Request</th>
                 </tr>
                 <tr class="body-1" th:each="transactions: ${transactions}">
                     <td><span th:text="'Transaction ID: '+ ${transactions.TID}">Name</span></td>
@@ -34,6 +35,12 @@
                     <td>
                         <form th:action="'/requests/student/' + ${transactions.TID}" method="post">
                             <button class="general-button button-1">Pay Now</button>
+                        </form>
+
+                    </td>
+                    <td>
+                        <form th:action="'/requests/student/' + ${transactions.TID}" method="post">
+                            <button class="general-button button-1">Delete</button>
                         </form>
 
                     </td>
