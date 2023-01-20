@@ -21,4 +21,6 @@ public interface RequestDao {
     public Request getRequest(int RID);
 
     public boolean updateRequest(int RID, String method);
+
+    public boolean updateComment(int RID, String comment);
 }

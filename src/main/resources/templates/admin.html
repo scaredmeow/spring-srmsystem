@@ -8,17 +8,30 @@
 
     <main>
         <aside class="aside-dashboard">
-            <h2>Admin Buttons</h2>
-            <button class="reg-button-filled button-1">Manage Employee Accounts</button>
-            <button class="reg-button-filled button-1">Check Rejeceted Requests</button>
-            <button class="reg-button-filled button-1">Check Completed Requests</button>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <h2>Admin Buttons</h2>
+                <form th:action="@{/requests/admin/employee}" method="get">
+                    <button class="reg-button-filled button-1">Manage Employee Accounts</button>
+                </form>
+            </div>
+
+
+            <!-- <button class="reg-button-filled button-1">Check Rejected Requests</button>
+            <button class="reg-button-filled button-1">Check Completed Requests</button> -->
             <h2>Admin Dashboard</h2>
-            <div class="box-dashboard"><span class="number">30</span><span class="text">Pending</span></div>
-            <div class="box-dashboard"><span class="number">30</span><span class="text">Approved</span></div>
-            <div class="box-dashboard"><span class="number">30</span><span class="text">Checked</span></div>
-            <div class="box-dashboard"><span class="number">30</span><span class="text">Printing</span></div>
-            <div class="box-dashboard"><span class="number">30</span><span class="text">Rejected</span></div>
-            <div class="box-dashboard"><span class="number">30</span><span class="text">Completed</span></div>
+            <div class="box-dashboard"><span class="number" th:text="${checking}">30</span><span class="text">For
+                    Checking</span>
+            </div>
+            <div class="box-dashboard"><span class="number" th:text="${approval}">30</span><span class="text">For
+                    Approval</span></div>
+            <div class="box-dashboard"><span class="number" th:text="${printing}">30</span><span class="text">For
+                    Printing</span></div>
+            <div class="box-dashboard"><span class="number" th:text="${fincheck}">30</span><span class="text">For Final
+                    Checking</span></div>
+            <div class="box-dashboard"><span class="number" th:text="${pickup}">30</span><span class="text">For
+                    Pickup</span></div>
+            <div class="box-dashboard"><span class="number" th:text="${rejected}">30</span><span
+                    class="text">Rejected</span></div>
         </aside>
         <section>
             <img class="icon-logo" th:src="@{/img/TUA-logo.png}">

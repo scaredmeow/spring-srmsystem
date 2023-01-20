@@ -116,6 +116,8 @@ public class AuthServiceImpl implements AuthService {
             view = "redirect:/requests/student";
         } else if (user.getRole().equals("ADMIN")) {
             view = "redirect:/requests/admin";
+        } else if (user.getRole().equals("EMPLOYEE")) {
+            view = "redirect:/requests/admin";
         }
         return view;
     }

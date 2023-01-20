@@ -1,13 +1,19 @@
 package com.code.srmsystem.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.code.srmsystem.dao.DashboardDao;
 import com.code.srmsystem.dao.RequestDao;
 import com.code.srmsystem.dao.UserDao;
+import com.code.srmsystem.model.Dashboard;
 import com.code.srmsystem.model.Request;
 import com.code.srmsystem.model.User;
 
@@ -20,14 +26,22 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private Request request;
 
+    @Autowired
+    private Dashboard dashboard;
+
+    private PasswordEncoder passwordEncoder;
     private UserDao userDao;
     private AuthService authService;
     private RequestDao requestDao;
+    private DashboardDao dashboardDao;
 
-    public AdminServiceImpl(UserDao userDao, AuthService authService, RequestDao requestDao) {
+    public AdminServiceImpl(UserDao userDao, AuthService authService, RequestDao requestDao,
+            DashboardDao dashboardDao, PasswordEncoder passwordEncoder) {
         this.authService = authService;
         this.userDao = userDao;
         this.requestDao = requestDao;
+        this.dashboardDao = dashboardDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -38,6 +52,13 @@ public class AdminServiceImpl implements AdminService {
         mav.addObject("noTable", true);
         List<Request> requests = this.requestDao.getRecentRequests();
         mav.addObject("requests", requests);
+        dashboard = this.dashboardDao.getNumber();
+        mav.addObject("pickup", dashboard.getPickup());
+        mav.addObject("checking", dashboard.getChecking());
+        mav.addObject("approval", dashboard.getApproval());
+        mav.addObject("fincheck", dashboard.getFincheck());
+        mav.addObject("printing", dashboard.getPrinting());
+        mav.addObject("rejected", dashboard.getRejected());
         return mav;
     }
 
@@ -95,5 +116,67 @@ public class AdminServiceImpl implements AdminService {
         mav.addObject("fullname",
                 student.getLast_name() + ", " + student.getFirst_name() + " " + student.getMiddle_name());
         return mav;
+    }
+
+    @Override
+    public String updateComment(int RID, String comment) {
+        this.requestDao.updateComment(RID, comment);
+        return "redirect:/requests/admin/check/" + RID;
+    }
+
+    @Override
+    public ModelAndView signup(
+            String username,
+            String email,
+            String password,
+            String cpassword,
+            String snumber,
+            String fname,
+            String mname,
+            String lname,
+            String mnumber,
+            String viewName,
+            Model model) {
+
+        boolean existsUser = this.userDao.existsUsername(username);
+        boolean existsEmail = this.userDao.existsEmail(email);
+        boolean existsStudentNumber = this.userDao.existsStudentNumber(snumber);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("existsEmail", existsEmail);
+        modelAndView.addObject("existsUser", existsUser);
+        modelAndView.addObject("existsStudentNumber", existsStudentNumber);
+
+        if (!cpassword.equals(password)) {
+            modelAndView.addObject("errorConfirmPassword", "error");
+        }
+
+        if (!existsEmail && !existsUser && !existsStudentNumber) {
+            if (cpassword.equals(password)) {
+                user.setEmail(email);
+                user.setPassword(passwordEncoder.encode(password));
+                user.setUsername(username);
+                user.setRole("EMPLOYEE");
+                user.setStudent_number(snumber);
+                user.setFirst_name(fname);
+                user.setMiddle_name(mname);
+                user.setLast_name(lname);
+                user.setMobile_number(mnumber);
+                userDao.saveUserRegistration(user);
+
+                model.asMap().clear();
+                final ModelAndView mav = new ModelAndView("redirect:/");
+                return mav;
+
+            } else {
+                modelAndView.setViewName(viewName);
+            }
+
+        } else {
+            modelAndView.setViewName(viewName);
+            modelAndView.setStatus(HttpStatus.CONFLICT);
+        }
+
+        return modelAndView;
     }
 }

@@ -40,8 +40,12 @@ public class SecurityConfiguration {
                 .authenticated()
                 .antMatchers("/requests/student", "/requests/student/**")
                 .hasRole("STUDENT")
-                .antMatchers("/requests/admin", "/requests/admin/**")
+                .antMatchers("/requests/admin", "/requests/admin/check", "/requests/admin/check/**",
+                        "/requests/admin/search", "/requests/admin/search/**")
                 .hasAnyRole("ADMIN", "EMPLOYEE")
+                .antMatchers("/requests/admin/employee",
+                        "/requests/admin/employee/**")
+                .hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/").permitAll()

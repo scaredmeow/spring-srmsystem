@@ -87,6 +87,7 @@ public class RequestDaoImpl implements RequestDao {
                 request.setCreated_at(date);
                 request.setRID(rs.getInt("RID"));
                 request.setStudent_number(rs.getString("student_number"));
+                request.setComment(rs.getString("comment"));
                 return request;
             }
         });
@@ -111,6 +112,7 @@ public class RequestDaoImpl implements RequestDao {
                 request.setCreated_at(date);
                 request.setRID(rs.getInt("RID"));
                 request.setStudent_number(rs.getString("student_number"));
+                request.setComment(rs.getString("comment"));
                 return request;
             }
         }, new Object[] { snumber });
@@ -152,6 +154,12 @@ public class RequestDaoImpl implements RequestDao {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public boolean updateComment(int RID, String comment) {
+        String sql = "UPDATE requests SET comment = ? WHERE RID = ? LIMIT 1";
+        return jdbcTemplate.update(sql, comment, RID) == 1;
     }
 
 }

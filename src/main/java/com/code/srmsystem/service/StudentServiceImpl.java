@@ -183,6 +183,7 @@ public class StudentServiceImpl implements StudentService {
             boolean result = this.transactionDao.deleteTransaction(TID);
 
         } catch (Exception e) {
+
         }
 
         return "redirect:/";

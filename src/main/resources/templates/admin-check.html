@@ -15,14 +15,14 @@
             </div>
             <div class="student-request">
                 <div class="manage-request">
-                    <h2>Request Information</h2> <br><br>
+                    <h2>Request Information</h2> <br>
                     <h3 th:text="${snumber} +' - ' + ${fullname}"></h3>
                     <table>
                         <tr class="h3">
                             <th>Document Request</th>
                             <th>Date Requested</th>
                             <th>Last Updated</th>
-                            <th>Payment Link</th>
+                            <th>Payment Reference</th>
                             <th>Request Status</th>
                         </tr>
                         <tr class="body-1" th:each="requests: ${requests}">
@@ -31,6 +31,22 @@
                             <td><span th:text="${requests.updated_at}"></span></td>
                             <td><span th:text="${requests.payment}"></span></td>
                             <td><span th:text="${requests.status}"></span></td>
+                        </tr>
+                        <tr>
+                            <th>Comments/Remarks</th>
+                            <td colspan="3">
+                                <form th:action="'/requests/admin/check/comment/' + ${requests.RID}" method="post">
+                                    <textarea id="comment" name="comment" class="textarea subtitle"
+                                        placeholder="Put here any comments/remarks for the document . . ."
+                                        th:text="${requests.comment}" required>No Comments/Remarks</textarea>
+
+                            </td>
+                            <td>
+
+                                <button class="general-button button-1">Update</button>
+
+                                </form>
+                            </td>
                         </tr>
                     </table>
                 </div>
