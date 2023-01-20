@@ -59,6 +59,11 @@ public class StudentController {
         return this.authService.requestRedirect();
     }
 
+    @GetMapping(path = "/{TID}/delete")
+    public String deleteTransaction(@PathVariable("TID") int TID) {
+        return this.studentService.deleteTransaction(TID);
+    }
+
     @PostMapping(path = "/new/submit")
     public ModelAndView postSubmitTrans(@RequestParam("payment") String payment) {
         return this.studentService.submitTransaction(payment, "redirect:/requests");
@@ -68,5 +73,4 @@ public class StudentController {
     public String getSubmitTransPage() {
         return this.authService.requestRedirect();
     }
-
 }

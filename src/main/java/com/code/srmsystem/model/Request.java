@@ -15,6 +15,7 @@ public class Request {
     private String created_at;
     private String student_number;
     private String payment;
+    private String comment;
 
     public String getPayment() {
         return payment;
@@ -44,7 +45,7 @@ public class Request {
     }
 
     public Request(int RID, int TID, int DID, Timestamp updated_at, String status, String name, String created_at,
-            String student_number, String payment) {
+            String student_number, String payment, String comment) {
         this.RID = RID;
         this.TID = TID;
         this.DID = DID;
@@ -54,6 +55,7 @@ public class Request {
         this.created_at = created_at;
         this.student_number = student_number;
         this.payment = payment;
+        this.comment = comment;
     }
 
     public int getRID() {
@@ -104,6 +106,14 @@ public class Request {
         this.name = name;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     @Override
     public String toString() {
         return "Post {RID=" + RID +
@@ -112,6 +122,7 @@ public class Request {
                 ", updated_at='" + updated_at + "\'" +
                 ", status='" + status + "\'" +
                 ", name='" + name + "\'" +
+                ", comment='" + comment + "\'" +
                 ", created_at='" + created_at + "\'" + "}";
     }
 

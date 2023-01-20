@@ -89,4 +89,11 @@ public class TransactionDaoImpl implements TransactionDao {
         return jdbcTemplate.queryForObject(sql, int.class);
     }
 
+    @Override
+    public boolean deleteTransaction(int TID) {
+        String sql = "DELETE FROM transactions WHERE TID = ?";
+        Object[] args = new Object[] { TID };
+        return jdbcTemplate.update(sql, args) == 1;
+    }
+
 }

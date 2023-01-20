@@ -11,8 +11,8 @@
             <img class="icon-logo" th:src="@{/img/TUA-logo.png}">
             <div class="section-header">
                 <h1>Confirm your Request</h1>
-                <span class="body-1">Please double check your document request and upload your proof of payment through
-                    a google drive link.</span>
+                <span class="body-1">Please double check your document request and enter the reference number of your
+                    payment</span>
             </div>
             <h2>Request Receipt</h2>
             <ul class="body-1">
@@ -22,7 +22,7 @@
             <div class="proof-of-payment">
                 <h2>Proof of Payment</h2>
                 <form method="post" th:action="@{/requests/student/new/submit}">
-                    <input type="text" name="payment" class="text-box body-2" placeholder="Google Drive Link" required>
+                    <input type="text" name="payment" class="text-box body-2" placeholder="Reference Number" required>
                     <button class="general-button button-1" th:unless="${noTID}">Submit</button>
                     <button class="general-button button-1" th:if="${noTID}"
                         th:formaction="@{'/requests/student/'+${TID}+'/submit'}">Submit</button>
@@ -32,8 +32,7 @@
         </section>
     </main>
 
-    <footer>
-        <span class="body-1">Copyright © Trinity University of Asia. All rights reserved.</span>
+    <footer th:replace="fragments.html :: footer">
     </footer>
 </body>
 

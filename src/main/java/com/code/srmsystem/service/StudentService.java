@@ -13,4 +13,6 @@ public interface StudentService {
     public ModelAndView updateTransaction(int TID, String viewName);
 
     public ModelAndView submitSpecificTransaction(String payment, int TID, String viewName);
+
+    public String deleteTransaction(int TID);
 }

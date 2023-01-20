@@ -62,6 +62,7 @@ public class RequestDaoImpl implements RequestDao {
                 String date = dateFormat.format(rs.getTimestamp("created_at"));
                 request.setCreated_at(date);
                 request.setRID(rs.getInt("RID"));
+                request.setComment(rs.getString("comment"));
                 return request;
             }
         }, new Object[] { curr_user.getUID() });
@@ -70,7 +71,7 @@ public class RequestDaoImpl implements RequestDao {
 
     @Override
     public List<Request> getRecentRequests() {
-        String sql = "SELECT r.*, d.name, t.created_at, u.student_number FROM requests AS r JOIN transactions AS t ON t.TID = r.TID JOIN documents AS d ON r.DID = d.DID JOIN users as u ON u.UID = t.UID WHERE NOT r.status = 'FOR PICKUP' AND NOT r.status = 'REJECTED' ORDER BY t.created_at DESC LIMIT 50";
+        String sql = "SELECT r.*, d.name, t.created_at, u.student_number FROM requests AS r JOIN transactions AS t ON t.TID = r.TID JOIN documents AS d ON r.DID = d.DID JOIN users as u ON u.UID = t.UID WHERE NOT r.status = 'FOR PICKUP' AND NOT r.status = 'REJECTED' ORDER BY t.created_at DESC LIMIT 100";
         List<Request> listOfRequests = jdbcTemplate.query(sql, new RowMapper<Request>() {
             SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
 
@@ -94,7 +95,7 @@ public class RequestDaoImpl implements RequestDao {
 
     @Override
     public List<Request> getSpecificRequests(String snumber) {
-        String sql = "SELECT r.*, d.name, t.created_at, u.student_number FROM requests AS r JOIN transactions AS t ON t.TID = r.TID JOIN documents AS d ON r.DID = d.DID JOIN users as u ON u.UID = t.UID WHERE u.student_number = ? ORDER BY t.created_at DESC";
+        String sql = "SELECT r.*, d.name, t.created_at, u.student_number FROM requests AS r JOIN transactions AS t ON t.TID = r.TID JOIN documents AS d ON r.DID = d.DID JOIN users as u ON u.UID = t.UID WHERE u.student_number = ? ORDER BY t.created_at DESC LIMIT 100";
         List<Request> listOfRequests = jdbcTemplate.query(sql, new RowMapper<Request>() {
             SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
 

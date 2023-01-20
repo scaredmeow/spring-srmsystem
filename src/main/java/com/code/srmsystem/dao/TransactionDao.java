@@ -19,4 +19,6 @@ public interface TransactionDao {
     public Transaction findByTransactionID(int TID);
 
     public int getLatestTransactionID();
+
+    public boolean deleteTransaction(int TID);
 }

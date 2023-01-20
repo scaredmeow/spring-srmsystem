@@ -45,6 +45,8 @@
                         <button class="general-button button-1">Sign Up</button>
                     </div>
                 </form>
+                <span class="body-2 redirect">By signing up, you agree to the <a th:href="@{/privacy}"> Privacy Notice
+                    </a></span> <br>
                 <span class="body-2 redirect">Have a trinity account? &nbsp<a th:href="@{/}">Login on your trinitian
                         account
                         now.</a></span>
@@ -52,8 +54,7 @@
         </section>
     </main>
 
-    <footer>
-        <span class="body-1">Copyright © Trinity University of Asia. All rights reserved.</span>
+    <footer th:replace="fragments.html :: footer">
     </footer>
 </body>
 

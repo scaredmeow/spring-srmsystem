@@ -32,6 +32,16 @@ public class HomeController {
         return this.authService.redirect("signup");
     }
 
+    @GetMapping(path = "/privacy")
+    public String privacypage() {
+        return "privacy-notice";
+    }
+
+    @GetMapping(path = "/faqs")
+    public String faqspage() {
+        return "faqs";
+    }
+
     @GetMapping(path = "/requests")
     public String requestsPage() {
         return this.authService.requestRedirect();

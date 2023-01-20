@@ -177,4 +177,15 @@ public class StudentServiceImpl implements StudentService {
         return mav;
     }
 
+    @Override
+    public String deleteTransaction(int TID) {
+        try {
+            boolean result = this.transactionDao.deleteTransaction(TID);
+
+        } catch (Exception e) {
+        }
+
+        return "redirect:/";
+    }
+
 }

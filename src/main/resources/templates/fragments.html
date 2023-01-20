@@ -32,7 +32,24 @@
         </div>
     </header>
     <footer th:fragment="footer">
-        <span class="body-1">Copyright © Trinity University of Asia. All rights reserved.</span>
+        <div class="footer-top">
+            <img th:src="@{/img/TUA-logo.png}">
+            <h2>Trinity University of Asia</h2>
+            <div class="footer-nav">
+                <div class="footer-nav-cat">
+                    <h3>Resources</h3>
+                    <a th:href="@{/faqs}">FAQs</a>
+                    <a href="http://www.tua.edu.ph/contactus/">Contact Us</a>
+                </div>
+                <div class="footer-nav-cat">
+                    <h3>About</h3>
+                    <a href="http://www.tua.edu.ph/career-tua/">Careers at TUA</a>
+                    <a th:href="@{/privacy}">Privacy Policy</a>
+                </div>
+
+            </div>
+        </div>
+        <span class="body-1">Copyright © 2023 Trinity University of Asia. All rights reserved.</span>
     </footer>
 </body>
 

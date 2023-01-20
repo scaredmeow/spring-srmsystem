@@ -39,8 +39,8 @@
 
                     </td>
                     <td>
-                        <form th:action="'/requests/student/' + ${transactions.TID}" method="post">
-                            <button class="general-button button-1">Delete</button>
+                        <form th:action="'/requests/student/' + ${transactions.TID} +'/delete'" method="get">
+                            <button class="error-general-button button-1">Delete</button>
                         </form>
 
                     </td>
@@ -54,20 +54,22 @@
                     <th>Date Requested</th>
                     <th>Last Update</th>
                     <th>Document Status</th>
+                    <th>Comments/Remarks</th>
                 </tr>
                 <tr class="body-1" th:each="requests: ${requests}">
                     <td><span th:text="${requests.name}">Name</span></td>
                     <td><span th:text="${requests.created_at}">Student ID</span></td>
                     <td><span th:text="${requests.updated_at}">Updated At</span></td>
                     <td><span th:text="${requests.status}">Approved</span></td>
+                    <td><span th:text="${requests.comment}">Approved</span></td>
+                    <!-- <td><span>Comments</span></td> -->
                 </tr>
             </table>
 
         </section>
     </main>
 
-    <footer>
-        <span class="body-1">Copyright © Trinity University of Asia. All rights reserved.</span>
+    <footer th:replace="fragments.html :: footer">
     </footer>
 </body>
 

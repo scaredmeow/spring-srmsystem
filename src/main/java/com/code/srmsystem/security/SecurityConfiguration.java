@@ -41,7 +41,7 @@ public class SecurityConfiguration {
                 .antMatchers("/requests/student", "/requests/student/**")
                 .hasRole("STUDENT")
                 .antMatchers("/requests/admin", "/requests/admin/**")
-                .hasRole("ADMIN")
+                .hasAnyRole("ADMIN", "EMPLOYEE")
                 .and()
                 .formLogin()
                 .loginPage("/").permitAll()
