@@ -12,22 +12,6 @@
             <form th:action="@{/requests/admin}" method="get">
                 <button class="reg-button-filled button-1">Back to dashboard</button>
             </form>
-            <!-- <button class="reg-button-filled button-1">Check Rejected Requests</button>
-            <button class="reg-button-filled button-1">Check Completed Requests</button> -->
-            <!-- <h2>Admin Dashboard</h2>
-            <div class="box-dashboard"><span class="number" th:text="${checking}">30</span><span class="text">For
-                    Checking</span>
-            </div>
-            <div class="box-dashboard"><span class="number" th:text="${approval}">30</span><span class="text">For
-                    Approval</span></div>
-            <div class="box-dashboard"><span class="number" th:text="${printing}">30</span><span class="text">For
-                    Printing</span></div>
-            <div class="box-dashboard"><span class="number" th:text="${fincheck}">30</span><span class="text">For Final
-                    Checking</span></div>
-            <div class="box-dashboard"><span class="number" th:text="${pickup}">30</span><span class="text">For
-                    Pickup</span></div>
-            <div class="box-dashboard"><span class="number" th:text="${rejected}">30</span><span
-                    class="text">Rejected</span></div> -->
         </aside>
         <section>
             <img class="icon-logo" th:src="@{/img/TUA-logo.png}">
@@ -35,31 +19,31 @@
                 <h1>Employee Management</h1>
                 <span class="body-1">Manage employee accounts</span>
             </div>
-            <form class="account" th:action="@{/requests/admin/employee/signup}" method="post">
-                <input type="email" id="email" name="email" class="text-box body-2" placeholder="Email Address"
-                    required>
-                <h4 th:if="${existsEmail}">Email already exists</h4>
-                <input type="text" id="snumber" name="snumber" class="text-box body-2" placeholder="Employee Number"
-                    required>
-                <h4 th:if="${existsStudentNumber}">Employee Number already exists</h4>
-                <input type="text" id="fname" name="fname" class="text-box body-2" placeholder="First Name" required>
-                <input type="text" id="mname" name="mname" class="text-box body-2" placeholder="Middle Name" required>
-                <input type="text" id="lname" name="lname" class="text-box body-2" placeholder="Last Name" required>
-                <input type="text" id="mnumber" name="mnumber" class="text-box body-2" placeholder="Mobile Number"
-                    required>
-                <input type="text" id="username" name="username" class="text-box body-2" placeholder="Username"
-                    required>
-                <h4 th:if="${existsUser}">Username already exists</h4>
-                <input type="password" id="password" name="password" class="text-box body-2" placeholder="Password"
-                    required>
-                <input type="password" id="cpassword" name="cpassword" class="text-box body-2"
-                    placeholder="Confirm Password" required>
-                <h4 th:if="${errorConfirmPassword}=='error'">
-                    Password does not match</h4>
-                <div class="form-buttons">
-                    <button class="general-button button-1">Employee Sign Up</button>
-                </div>
-            </form>
+            <table>
+                <tr class="h3">
+                    <th>Employeed ID</th>
+                    <th>Employee Number</th>
+                    <th>Email Address</th>
+                    <th>Full Name</th>
+                    <th>Mobile Number</th>
+                    <th>Action</th>
+                </tr>
+                <tr class="body-1" th:each="users: ${users}">
+                    <td><span th:text="${users.UID}">202212345</span></td>
+                    <td><span th:text="${users.student_number}">Unassigned</span></td>
+                    <td><span th:text="${users.email}">TOR</span></td>
+                    <td><span
+                            th:text="${users.last_name} + ', ' + ${users.first_name} + ' ' + ${users.middle_name}  ">12/12/2012</span>
+                    </td>
+                    <td><span th:text="${users.mobile_number}">12/12/2012</span>
+                    </td>
+                    <td>
+                        <form th:action="@{/requests/admin/employee/delete/} + ${users.UID}" method="post">
+                            <button class="error-general-button button-1">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
             </div>
 
         </section>

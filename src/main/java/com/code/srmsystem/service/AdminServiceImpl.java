@@ -228,4 +228,27 @@ public class AdminServiceImpl implements AdminService {
         return modelAndView;
     }
 
+    @Override
+    public ModelAndView displayAllEmployees(String viewName) {
+        ModelAndView mav = new ModelAndView(viewName);
+        user = this.userDao.findByEmail(this.authService.getUser());
+        mav.addObject("username", user.getLast_name());
+        mav.addObject("date", this.authService.getDate());
+        List<User> users = this.userDao.getAllUsers();
+        mav.addObject("users", users);
+        return mav;
+    }
+
+    @Override
+    public ModelAndView deleteEmployee(String viewName, int UID) {
+        ModelAndView mav = new ModelAndView(viewName);
+        user = this.userDao.findByEmail(this.authService.getUser());
+        mav.addObject("username", user.getLast_name());
+        mav.addObject("date", this.authService.getDate());
+        String email = this.userDao.findByUserID(UID).getEmail();
+        this.userDao.deleteUser(email);
+        this.userDao.deleteLogin(email);
+        return mav;
+    }
+
 }

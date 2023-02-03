@@ -1,9 +1,13 @@
 package com.code.srmsystem.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.code.srmsystem.model.User;
@@ -103,6 +107,43 @@ public class UserDaoImpl implements UserDao {
     public boolean activateAccount(String Email) {
         String sql = "UPDATE login SET is_active = 1 WHERE email = ? LIMIT 1";
         return jdbcTemplate.update(sql, Email) == 1;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        String sql = "SELECT u.* FROM users as u join login as l on l.email = u.email WHERE l.role = 'EMPLOYEE'";
+
+        List<User> listOfUsers = jdbcTemplate.query(sql, new RowMapper<User>() {
+
+            @Override
+            public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+                User user = new User();
+                user.setUID(rs.getInt("UID"));
+                user.setStudent_number(rs.getString("student_number"));
+                user.setFirst_name(rs.getString("first_name"));
+                user.setMiddle_name(rs.getString("middle_name"));
+                user.setLast_name(rs.getString("last_name"));
+                user.setEmail(rs.getString("email"));
+                user.setMobile_number(rs.getString("mobile_number"));
+                user.setUsername(rs.getString("username"));
+                return user;
+            }
+        });
+        return listOfUsers;
+    }
+
+    @Override
+    public boolean deleteLogin(String email) {
+        String sql = "DELETE FROM login WHERE email = ?";
+        Object[] args = new Object[] { email };
+        return jdbcTemplate.update(sql, args) == 1;
+    }
+
+    @Override
+    public boolean deleteUser(String email) {
+        String sql = "DELETE FROM users WHERE email = ?";
+        Object[] args = new Object[] { email };
+        return jdbcTemplate.update(sql, args) == 1;
     }
 
 }

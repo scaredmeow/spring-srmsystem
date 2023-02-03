@@ -14,6 +14,8 @@ public interface AdminService {
 
     public ModelAndView displayCurrentTransactionAssign(int RID);
 
+    public ModelAndView displayAllEmployees(String viewName);
+
     public ModelAndView updateCurrentTransaction(int RID, String method);
 
     public String updateComment(int RID, String comment);
@@ -30,4 +32,6 @@ public interface AdminService {
             String mnumber,
             String viewName,
             Model model);
+
+    public ModelAndView deleteEmployee(String viewName, int UID);
 }

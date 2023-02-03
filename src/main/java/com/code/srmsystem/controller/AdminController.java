@@ -73,4 +73,14 @@ public class AdminController {
         return this.adminService.signup(username, email, password, cpassword, snumber, fname, mname, lname, mnumber,
                 "signup", model);
     }
+
+    @GetMapping(path = "/employee/delete")
+    public ModelAndView employeeDeletePage() {
+        return this.adminService.displayAllEmployees("employee-delete");
+    }
+
+    @PostMapping(path = "/employee/delete/{UID}")
+    public ModelAndView employeeDeleteAccount(@PathVariable("UID") int UID) {
+        return this.adminService.deleteEmployee("redirect:/requests/admin/employee/delete", UID);
+    }
 }

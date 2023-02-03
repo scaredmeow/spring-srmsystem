@@ -34,9 +34,10 @@
         </section>
         <section class="header-dashboard">
             <form th:action="@{/requests/admin/employee}" method="get">
-                <button class="box-dashboard-1"><span class="text erro">Create new
+                <button class="box-dashboard-1"><span class="text">Create new
                         account</span></button>
-                <button class="box-dashboard-2"><span class="text">Delete employee
+                <button class="error-general-button box-dashboard-2"
+                    th:formaction="@{/requests/admin/employee/delete}"><span class="text">Delete employee
                         account</span></button>
             </form>
 
