@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.code.srmsystem.dao.UserDao;
 import com.code.srmsystem.service.AuthService;
 
 // import com.code.srmsystem.service.AuthService;
@@ -18,9 +19,11 @@ import com.code.srmsystem.service.AuthService;
 public class CustomErrorController implements ErrorController {
 
     private AuthService authService;
+    private UserDao userDao;
 
-    public CustomErrorController(AuthService authService) {
+    public CustomErrorController(AuthService authService, UserDao userDao) {
         this.authService = authService;
+        this.userDao = userDao;
     }
 
     @GetMapping("/error")
@@ -30,7 +33,8 @@ public class CustomErrorController implements ErrorController {
         String errorPage = "error/error"; // default
 
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-
+        model.addAttribute("username", this.userDao.findByEmail(this.authService.getUser()).getLast_name());
+        model.addAttribute("date", this.authService.getDate());
         model.addAttribute("username", this.authService.getUser());
         if (status != null) {
             Integer statusCode = Integer.valueOf(status.toString());

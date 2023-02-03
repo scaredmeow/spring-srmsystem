@@ -10,36 +10,36 @@ import com.code.srmsystem.model.Dashboard;
 @Repository
 public class DashboardDaoImpl implements DashboardDao {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+        @Autowired
+        private JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    private Dashboard dashboard;
+        @Autowired
+        private Dashboard dashboard;
 
-    @Override
-    public Dashboard getNumber() {
+        @Override
+        public Dashboard getNumber() {
 
-        int check = (int) jdbcTemplate.queryForObject("SELECT COUNT(*) FROM requests WHERE status = ?",
-                int.class, "FOR CHECKING");
-        int approve = (int) jdbcTemplate.queryForObject("SELECT COUNT(*) FROM requests WHERE status = ?",
-                int.class, "FOR APPROVAL");
-        int printing = (int) jdbcTemplate.queryForObject("SELECT COUNT(*) FROM requests WHERE status = ?",
-                int.class, "FOR PRINTING");
-        int fincheck = (int) jdbcTemplate.queryForObject(
-                "SELECT COUNT(*) FROM requests WHERE status = ?",
-                int.class, "FOR FINAL CHECKING");
-        int pickup = (int) jdbcTemplate.queryForObject("SELECT COUNT(*) FROM requests WHERE status = ?",
-                int.class, "FOR PICKUP");
-        int reject = (int) jdbcTemplate.queryForObject("SELECT COUNT(*) FROM requests WHERE status = ?",
-                int.class, "REJECTED");
+                int check = (int) jdbcTemplate.queryForObject("SELECT COUNT(*) FROM requests WHERE status = ?",
+                                int.class, "FOR CHECKING");
+                int approve = (int) jdbcTemplate.queryForObject("SELECT COUNT(*) FROM requests WHERE status = ?",
+                                int.class, "FOR APPROVAL");
+                int printing = (int) jdbcTemplate.queryForObject("SELECT COUNT(*) FROM requests WHERE status = ?",
+                                int.class, "FOR PRINTING");
+                int fincheck = (int) jdbcTemplate.queryForObject(
+                                "SELECT COUNT(*) FROM requests WHERE status = ?",
+                                int.class, "FOR PICKUP");
+                int pickup = (int) jdbcTemplate.queryForObject("SELECT COUNT(*) FROM requests WHERE status = ?",
+                                int.class, "DONE");
+                int reject = (int) jdbcTemplate.queryForObject("SELECT COUNT(*) FROM requests WHERE status = ?",
+                                int.class, "REJECTED");
 
-        dashboard.setChecking(check);
-        dashboard.setApproval(approve);
-        dashboard.setFincheck(fincheck);
-        dashboard.setPrinting(printing);
-        dashboard.setRejected(reject);
-        dashboard.setPickup(pickup);
-        return dashboard;
-    }
+                dashboard.setChecking(check);
+                dashboard.setApproval(approve);
+                dashboard.setFincheck(fincheck);
+                dashboard.setPrinting(printing);
+                dashboard.setRejected(reject);
+                dashboard.setPickup(pickup);
+                return dashboard;
+        }
 
 }

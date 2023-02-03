@@ -15,16 +15,16 @@ public class UserDaoImpl implements UserDao {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public User loginByUserName(String username) {
-        String sql = "SELECT * FROM login WHERE username = '"
-                + username + "'";
+    public User loginByEmail(String email) {
+        String sql = "SELECT * FROM login WHERE email = '"
+                + email + "'";
         return jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(User.class));
     }
 
     @Override
-    public User findByUserName(String username) {
-        String sql = "SELECT u.*, l.password, l.role FROM users as u join login as l on l.username = u.username WHERE u.username = '"
-                + username + "'";
+    public User findByEmail(String email) {
+        String sql = "SELECT u.*, l.password, l.role FROM users as u join login as l on l.email = u.email WHERE u.email = '"
+                + email + "'";
         return jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(User.class));
     }
 
@@ -36,9 +36,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean saveUserRegistration(User user) {
-        String sql = "INSERT INTO login(username,password,role) VALUES(?, ?, ?)";
+        String sql = "INSERT INTO login(email,password,role) VALUES(?, ?, ?)";
         if ((jdbcTemplate.update(sql,
-                user.getUsername(),
+                user.getEmail(),
                 user.getPassword(),
                 user.getRole()) == 1)) {
             String sql2 = "INSERT INTO users(username,email,student_number,first_name,middle_name,last_name,mobile_number) VALUES(?, ?, ?, ?, ?, ?, ?)";
@@ -68,11 +68,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean existsUsername(String username) {
-        String sql = "SELECT username FROM users WHERE username = ? LIMIT 1";
+    public boolean existsUsername(String email) {
+        String sql = "SELECT email FROM users WHERE email = ? LIMIT 1";
 
         try {
-            jdbcTemplate.queryForObject(sql, String.class, username);
+            jdbcTemplate.queryForObject(sql, String.class, email);
             return true;
 
         } catch (EmptyResultDataAccessException e) {
@@ -97,6 +97,12 @@ public class UserDaoImpl implements UserDao {
     public User findByStudentNumber(String student_number) {
         String sql = "SELECT * FROM users WHERE student_number = '" + student_number + "'";
         return jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(User.class));
+    }
+
+    @Override
+    public boolean activateAccount(String Email) {
+        String sql = "UPDATE login SET is_active = 1 WHERE email = ? LIMIT 1";
+        return jdbcTemplate.update(sql, Email) == 1;
     }
 
 }

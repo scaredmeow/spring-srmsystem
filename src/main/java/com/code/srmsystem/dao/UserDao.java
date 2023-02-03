@@ -6,9 +6,9 @@ import com.code.srmsystem.model.User;
 
 @Component
 public interface UserDao {
-    public User loginByUserName(String username);
+    public User loginByEmail(String email);
 
-    public User findByUserName(String username);
+    public User findByEmail(String email);
 
     public User findByUserID(int UID);
 
@@ -18,7 +18,10 @@ public interface UserDao {
 
     public boolean existsEmail(String email);
 
-    public boolean existsUsername(String username);
+    public boolean existsUsername(String email);
 
     public boolean existsStudentNumber(String student_number);
+
+    public boolean activateAccount(String Email);
+
 }

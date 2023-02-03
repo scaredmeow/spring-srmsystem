@@ -26,6 +26,11 @@ public class AdminController {
         return this.adminService.displayUserNoTable("admin");
     }
 
+    @GetMapping(path = "/count/{method}")
+    public ModelAndView adminPage(@PathVariable("method") String method) {
+        return this.adminService.displayStatusRequests(method, "admin");
+    }
+
     @PostMapping(path = "/search")
     public ModelAndView search(@RequestParam("snumber") String snumber) {
         if (snumber.equals("")) {
@@ -38,6 +43,11 @@ public class AdminController {
     @GetMapping(path = "/check/{RID}")
     public ModelAndView checkPage(@PathVariable("RID") int RID) {
         return this.adminService.displayCurrentTransaction(RID);
+    }
+
+    @GetMapping(path = "/check/assign/{RID}")
+    public ModelAndView checkPageAssign(@PathVariable("RID") int RID) {
+        return this.adminService.displayCurrentTransactionAssign(RID);
     }
 
     @PostMapping(path = "/check/{RID}/{method}")

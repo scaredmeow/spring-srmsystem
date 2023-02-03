@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,19 +18,23 @@ public class HomeController {
 
     private AuthService authService;
 
-    @Autowired
     public HomeController(AuthService authService) {
         this.authService = authService;
     }
 
     @GetMapping
-    public String indexPage() {
-        return this.authService.redirect("index");
+    public String indexPage(Model model) {
+        return this.authService.redirect("index", model);
+    }
+
+    @GetMapping(path = "/{encryptedKey}")
+    public String activateAccount(@PathVariable("encryptedKey") String encryptedKey, Model model) {
+        return this.authService.redirectSpecial("index", encryptedKey, model);
     }
 
     @GetMapping(path = "/signup")
-    public String signupPage() {
-        return this.authService.redirect("signup");
+    public String signupPage(Model model) {
+        return this.authService.redirect("signup", model);
     }
 
     @GetMapping(path = "/privacy")

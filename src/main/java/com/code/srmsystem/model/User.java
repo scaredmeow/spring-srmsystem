@@ -19,6 +19,7 @@ public class User {
     private String middle_name;
     private String last_name;
     private String mobile_number;
+    private int is_active;
 
     public User() {
     }
@@ -46,7 +47,8 @@ public class User {
     }
 
     public User(int UID, String username, String password, String confirmPassword, String email, String role,
-            String student_number, String first_name, String middle_name, String last_name, String mobile_number) {
+            String student_number, String first_name, String middle_name, String last_name, String mobile_number,
+            int is_active) {
         this.UID = UID;
         this.username = username;
         this.password = password;
@@ -58,6 +60,7 @@ public class User {
         this.middle_name = middle_name;
         this.last_name = last_name;
         this.mobile_number = mobile_number;
+        this.is_active = is_active;
     }
 
     public int getUID() {
@@ -66,6 +69,14 @@ public class User {
 
     public void setUID(int UID) {
         this.UID = UID;
+    }
+
+    public int getIs_active() {
+        return is_active;
+    }
+
+    public void setIs_active(int is_active) {
+        this.is_active = is_active;
     }
 
     public String getUsername() {
@@ -150,7 +161,8 @@ public class User {
 
     @Override
     public String toString() {
-        return "User {UID=" + UID + ", username='"
+        return "User {UID=" + UID + ", is_active="
+                + is_active + ", username='"
                 + username + "\'" + ", password='"
                 + password + "\'" + "confirmPassword='"
                 + confirmPassword + "\'" + ", email='"

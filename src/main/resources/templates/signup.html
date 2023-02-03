@@ -18,6 +18,8 @@
                     <h1>Hello, Guest</h1>
                     <span class="body-1">Join the Trinitian Community! Sign up to gain access to trinity portal.</span>
                 </div>
+                <h4 th:if="${activate}">Please activate your account through the email sent to your email address.
+                </h4>
                 <form class="account" th:action="@{/signup}" method="post">
                     <input type="email" id="email" name="email" class="text-box body-2" placeholder="Email Address"
                         required>

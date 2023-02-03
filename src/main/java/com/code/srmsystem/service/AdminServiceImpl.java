@@ -1,6 +1,5 @@
 package com.code.srmsystem.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +46,9 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ModelAndView displayUserNoTable(String viewName) {
         ModelAndView mav = new ModelAndView(viewName);
-        user = this.userDao.findByUserName(this.authService.getUser());
-        mav.addObject("username", user.getUsername());
+        user = this.userDao.findByEmail(this.authService.getUser());
+        mav.addObject("username", user.getLast_name());
+        mav.addObject("date", this.authService.getDate());
         mav.addObject("noTable", true);
         List<Request> requests = this.requestDao.getRecentRequests();
         mav.addObject("requests", requests);
@@ -63,10 +63,37 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public ModelAndView displayStatusRequests(String method, String viewName) {
+        ModelAndView mav = new ModelAndView(viewName);
+        user = this.userDao.findByEmail(this.authService.getUser());
+        mav.addObject("username", user.getLast_name());
+        mav.addObject("date", this.authService.getDate());
+        mav.addObject("noTable", true);
+        List<Request> requests = this.requestDao.getStatusRequests(method);
+        mav.addObject("requests", requests);
+        dashboard = this.dashboardDao.getNumber();
+        mav.addObject("pickup", dashboard.getPickup());
+        mav.addObject("checking", dashboard.getChecking());
+        mav.addObject("approval", dashboard.getApproval());
+        mav.addObject("fincheck", dashboard.getFincheck());
+        mav.addObject("printing", dashboard.getPrinting());
+        mav.addObject("rejected", dashboard.getRejected());
+        return mav;
+    }
+
+    @Override
     public ModelAndView displayUserTable(String snumber, String viewName) {
         ModelAndView mav = new ModelAndView(viewName);
-        user = this.userDao.findByUserName(this.authService.getUser());
-        mav.addObject("username", user.getUsername());
+        user = this.userDao.findByEmail(this.authService.getUser());
+        mav.addObject("username", user.getLast_name());
+        mav.addObject("date", this.authService.getDate());
+        dashboard = this.dashboardDao.getNumber();
+        mav.addObject("pickup", dashboard.getPickup());
+        mav.addObject("checking", dashboard.getChecking());
+        mav.addObject("approval", dashboard.getApproval());
+        mav.addObject("fincheck", dashboard.getFincheck());
+        mav.addObject("printing", dashboard.getPrinting());
+        mav.addObject("rejected", dashboard.getRejected());
         try {
             User student = new User();
             student = this.userDao.findByStudentNumber(snumber);
@@ -88,8 +115,9 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ModelAndView displayCurrentTransaction(int RID) {
         ModelAndView mav = new ModelAndView("admin-check");
-        user = this.userDao.findByUserName(this.authService.getUser());
-        mav.addObject("username", user.getUsername());
+        user = this.userDao.findByEmail(this.authService.getUser());
+        mav.addObject("username", user.getLast_name());
+        mav.addObject("date", this.authService.getDate());
         request = this.requestDao.getRequest(RID);
         mav.addObject("requests", request);
         User student = new User();
@@ -102,10 +130,29 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public ModelAndView displayCurrentTransactionAssign(int RID) {
+        ModelAndView mav = new ModelAndView("admin-check");
+        user = this.userDao.findByEmail(this.authService.getUser());
+        mav.addObject("username", user.getLast_name());
+        mav.addObject("date", this.authService.getDate());
+        request = this.requestDao.getRequest(RID);
+        mav.addObject("requests", request);
+        User student = new User();
+        student = this.userDao.findByStudentNumber(request.getStudent_number());
+        mav.addObject("snumber", request.getStudent_number());
+        mav.addObject("fullname",
+                student.getLast_name() + ", " + student.getFirst_name() + " " + student.getMiddle_name());
+        mav.addObject("RID", RID);
+        this.requestDao.updateAssign(user.getLast_name(), RID);
+        return mav;
+    }
+
+    @Override
     public ModelAndView updateCurrentTransaction(int RID, String method) {
         ModelAndView mav = new ModelAndView("admin-check");
-        user = this.userDao.findByUserName(this.authService.getUser());
-        mav.addObject("username", user.getUsername());
+        user = this.userDao.findByEmail(this.authService.getUser());
+        mav.addObject("username", user.getLast_name());
+        mav.addObject("date", this.authService.getDate());
         this.requestDao.updateRequest(RID, method);
 
         request = this.requestDao.getRequest(RID);
@@ -157,6 +204,7 @@ public class AdminServiceImpl implements AdminService {
                 user.setPassword(passwordEncoder.encode(password));
                 user.setUsername(username);
                 user.setRole("EMPLOYEE");
+                user.setIs_active(1);
                 user.setStudent_number(snumber);
                 user.setFirst_name(fname);
                 user.setMiddle_name(mname);
@@ -179,4 +227,5 @@ public class AdminServiceImpl implements AdminService {
 
         return modelAndView;
     }
+
 }

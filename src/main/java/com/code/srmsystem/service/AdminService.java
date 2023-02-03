@@ -8,7 +8,11 @@ public interface AdminService {
 
     public ModelAndView displayUserTable(String snumber, String viewName);
 
+    public ModelAndView displayStatusRequests(String method, String viewName);
+
     public ModelAndView displayCurrentTransaction(int RID);
+
+    public ModelAndView displayCurrentTransactionAssign(int RID);
 
     public ModelAndView updateCurrentTransaction(int RID, String method);
 

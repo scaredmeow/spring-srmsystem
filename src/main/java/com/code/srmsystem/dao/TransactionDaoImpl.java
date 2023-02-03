@@ -40,7 +40,7 @@ public class TransactionDaoImpl implements TransactionDao {
     @Override
     public boolean updateLatestTransaction(String payment) {
         String sql = "UPDATE transactions SET payment= ?, status='PAID' WHERE status='UNPAID' AND UID = ? ORDER BY created_at DESC LIMIT 1";
-        User curr_user = this.userDao.findByUserName(this.authService.getUser());
+        User curr_user = this.userDao.findByEmail(this.authService.getUser());
         return jdbcTemplate.update(
                 sql,
                 payment,
@@ -50,7 +50,7 @@ public class TransactionDaoImpl implements TransactionDao {
     @Override
     public List<Transaction> getUnpaidTransactions() {
         String sql = "SELECT * FROM transactions WHERE status='UNPAID' AND UID = ? ORDER BY created_at DESC";
-        User curr_user = this.userDao.findByUserName(this.authService.getUser());
+        User curr_user = this.userDao.findByEmail(this.authService.getUser());
         List<Transaction> listOfTransactions = jdbcTemplate.query(sql, new RowMapper<Transaction>() {
             SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
 

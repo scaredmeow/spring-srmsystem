@@ -112,10 +112,3 @@ a {
   color: var(--global-foreground-color);
   font-weight: 600;
 }
-
-.textarea {
-  border: 1px solid var(--global-foreground-color);
-  padding: 1rem 1rem;
-  width: 24rem;
-  height: 1rem;
-}

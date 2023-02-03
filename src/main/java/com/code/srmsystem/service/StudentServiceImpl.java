@@ -51,8 +51,9 @@ public class StudentServiceImpl implements StudentService {
         ModelAndView mav = new ModelAndView(viewName);
         List<Transaction> transactions = this.transactionDao.getUnpaidTransactions();
         List<Request> requests = this.requestDao.getAllRequests();
-        user = this.userDao.findByUserName(this.authService.getUser());
-        mav.addObject("username", user.getUsername());
+        user = this.userDao.findByEmail(this.authService.getUser());
+        mav.addObject("date", this.authService.getDate());
+        mav.addObject("username", user.getLast_name());
         mav.addObject("fullname", user.getLast_name() + ", " + user.getFirst_name() + " " + user.getMiddle_name());
         mav.addObject("transactions", transactions);
         mav.addObject("requests", requests);
@@ -62,7 +63,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public ModelAndView createTransaction(String[] requests, String viewName, Model model) {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("username", this.authService.getUser());
+        // mav.addObject("username", this.authService.getUser());
+        user = this.userDao.findByEmail(this.authService.getUser());
+        mav.addObject("username", user.getLast_name());
+        mav.addObject("date", this.authService.getDate());
         if (requests.length > 1) {
             List<Document> documents = new ArrayList<Document>();
             float total = 0;
@@ -79,7 +83,7 @@ public class StudentServiceImpl implements StudentService {
             mav.setViewName("student-req-receipt");
 
             String document_array = String.join(",", Arrays.copyOfRange(requests, 1, requests.length));
-            User curr_user = this.userDao.findByUserName(this.authService.getUser());
+            User curr_user = this.userDao.findByEmail(this.authService.getUser());
             transaction.setUID(curr_user.getUID());
             transaction.setDocuments(document_array);
 
@@ -100,8 +104,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public ModelAndView updateTransaction(int TID, String viewName) {
         ModelAndView mav = new ModelAndView(viewName);
+        user = this.userDao.findByEmail(this.authService.getUser());
+        mav.addObject("date", this.authService.getDate());
         mav.addObject("noTID", true);
-        mav.addObject("username", this.authService.getUser());
+        mav.addObject("username", user.getLast_name());
         transaction = this.transactionDao.findByTransactionID(TID);
 
         String[] requests = transaction.getDocuments().split(",");
@@ -124,6 +130,8 @@ public class StudentServiceImpl implements StudentService {
     public ModelAndView submitTransaction(String payment, String viewName) {
         ModelAndView mav = new ModelAndView(viewName);
         this.transactionDao.updateLatestTransaction(payment);
+        user = this.userDao.findByEmail(this.authService.getUser());
+        mav.addObject("date", this.authService.getDate());
 
         Timestamp timestamp = null;
         try {
@@ -154,7 +162,8 @@ public class StudentServiceImpl implements StudentService {
     public ModelAndView submitSpecificTransaction(String payment, int TID, String viewName) {
         ModelAndView mav = new ModelAndView(viewName);
         this.transactionDao.updateSpecificTransaction(payment, TID);
-
+        user = this.userDao.findByEmail(this.authService.getUser());
+        mav.addObject("date", this.authService.getDate());
         Timestamp timestamp = null;
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("MM dd yyyy hh:mm:ss");

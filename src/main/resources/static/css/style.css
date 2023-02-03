@@ -15,8 +15,7 @@
 
 h1,
 h2,
-h3,
-h4 {
+h3 {
   margin: 0;
 }
 
@@ -43,15 +42,6 @@ h3,
   font-weight: 700;
   font-size: 1.125rem;
   line-height: 1.40625rem;
-}
-
-h4,
-.h4 {
-  font-family: "Source Sans Pro";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 1rem;
-  line-height: 1.25rem;
 }
 
 .subtitle {
@@ -92,4 +82,8 @@ h4,
   font-weight: 400;
   font-size: 0.75rem;
   line-height: 0.9375rem;
+}
+
+.bold {
+  font-weight: 600;
 }

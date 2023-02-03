@@ -6,38 +6,86 @@
 <body>
     <header th:replace="fragments.html :: header"></header>
 
+    <main class="main-dashboard" sec:authorize="hasRole('ROLE_ADMIN')">
+        <h1>ADMIN DASHBOARD</h1>
+        <section class="header-dashboard">
+            <form id="hidden-form-buttons"></form>
+            <!-- <form class="dashboard-status" th:action="@{/requests/admin/}" method="post"> -->
+            <button class="box-dashboard" th:formaction="@{/requests/admin/count/check}"
+                th:form="hidden-form-buttons"><span class="number" th:text="${checking}">30</span><span class="text">For
+                    Checking</span>
+            </button>
+            <button class="box-dashboard" th:formaction="@{/requests/admin/count/receive}"
+                th:form="hidden-form-buttons"><span class="number" th:text="${approval}">30</span><span class="text">For
+                    Approval</span></button>
+            <button class="box-dashboard" th:formaction="@{/requests/admin/count/approve}"
+                th:form="hidden-form-buttons"><span class="number" th:text="${printing}">30</span><span class="text">For
+                    Printing</span></button>
+            <button class="box-dashboard" th:formaction="@{/requests/admin/count/print}"
+                th:form="hidden-form-buttons"><span class="number" th:text="${fincheck}">30</span><span class="text">For
+                    Pickup</span></button>
+            <button class="box-dashboard" th:formaction="@{/requests/admin/count/complete}"
+                th:form="hidden-form-buttons"><span class="number" th:text="${pickup}">30</span><span
+                    class="text">Done</span>
+            </button>
+            <button class="box-dashboard" th:formaction="@{/requests/admin/count/reject}"
+                th:form="hidden-form-buttons"><span class="number" th:text="${rejected}">30</span><span
+                    class="text">Rejected</span></button>
+        </section>
+        <section class="header-dashboard">
+            <form th:action="@{/requests/admin/employee}" method="get">
+                <button class="box-dashboard-1"><span class="text erro">Create new
+                        account</span></button>
+                <button class="box-dashboard-2"><span class="text">Delete employee
+                        account</span></button>
+            </form>
+
+        </section>
+    </main>
     <main>
-        <aside class="aside-dashboard">
+        <aside class="aside-dashboard" sec:authorize="hasRole('ROLE_EMPLOYEE')">
             <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <h2>Admin Buttons</h2>
                 <form th:action="@{/requests/admin/employee}" method="get">
                     <button class="reg-button-filled button-1">Manage Employee Accounts</button>
                 </form>
             </div>
-
-
             <!-- <button class="reg-button-filled button-1">Check Rejected Requests</button>
             <button class="reg-button-filled button-1">Check Completed Requests</button> -->
-            <h2>Admin Dashboard</h2>
-            <div class="box-dashboard"><span class="number" th:text="${checking}">30</span><span class="text">For
+            <form id="hidden-form-buttons"></form>
+            <h2 sec:authorize="hasRole('ROLE_ADMIN')">Admin Dashboard</h2>
+            <h2>Employee Dashboard</h2>
+            <!-- <form class="dashboard-status" th:action="@{/requests/admin/}" method="post"> -->
+            <button class="box-dashboard" th:formaction="@{/requests/admin/count/check}"
+                th:form="hidden-form-buttons"><span class="number" th:text="${checking}">30</span><span class="text">For
                     Checking</span>
-            </div>
-            <div class="box-dashboard"><span class="number" th:text="${approval}">30</span><span class="text">For
-                    Approval</span></div>
-            <div class="box-dashboard"><span class="number" th:text="${printing}">30</span><span class="text">For
-                    Printing</span></div>
-            <div class="box-dashboard"><span class="number" th:text="${fincheck}">30</span><span class="text">For Final
-                    Checking</span></div>
-            <div class="box-dashboard"><span class="number" th:text="${pickup}">30</span><span class="text">For
-                    Pickup</span></div>
-            <div class="box-dashboard"><span class="number" th:text="${rejected}">30</span><span
-                    class="text">Rejected</span></div>
+            </button>
+            <button class="box-dashboard" th:formaction="@{/requests/admin/count/receive}"
+                th:form="hidden-form-buttons"><span class="number" th:text="${approval}">30</span><span class="text">For
+                    Approval</span></button>
+            <button class="box-dashboard" th:formaction="@{/requests/admin/count/approve}"
+                th:form="hidden-form-buttons"><span class="number" th:text="${printing}">30</span><span class="text">For
+                    Printing</span></button>
+            <button class="box-dashboard" th:formaction="@{/requests/admin/count/print}"
+                th:form="hidden-form-buttons"><span class="number" th:text="${fincheck}">30</span><span class="text">For
+                    Pickup</span></button>
+            <button class="box-dashboard" th:formaction="@{/requests/admin/count/complete}"
+                th:form="hidden-form-buttons"><span class="number" th:text="${pickup}">30</span><span
+                    class="text">Done</span>
+            </button>
+            <button class="box-dashboard" th:formaction="@{/requests/admin/count/reject}"
+                th:form="hidden-form-buttons"><span class="number" th:text="${rejected}">30</span><span
+                    class="text">Rejected</span></button>
+            <!-- </form> -->
         </aside>
+
         <section>
-            <img class="icon-logo" th:src="@{/img/TUA-logo.png}">
-            <div class="section-header">
-                <h1>Student Request Management</h1>
-                <span class="body-1">Check the pending requests and do necessary request management</span>
+            <div class="section-header-main">
+                <img class="icon-logo" th:src="@{/img/TUA-logo.png}">
+                <div class="section-header">
+                    <h1>Student Request Management</h1>
+                    <span class="body-1">Check the pending requests and do necessary request management</span>
+                </div>
             </div>
             <div class="student-request">
                 <div class="check-request">
@@ -58,19 +106,39 @@
                     <table>
                         <tr class="h3">
                             <th>Student Number</th>
+                            <th>Assigned Employee</th>
                             <th>Document Request</th>
                             <th>Date Requested</th>
+                            <th sec:authorize="hasRole('ROLE_ADMIN')">Last Updated</th>
                             <th>Request Status</th>
                             <th>Document Action</th>
                         </tr>
                         <tr class="body-1" th:each="requests: ${requests}">
                             <td><span th:text="${requests.student_number}">202212345</span></td>
+                            <td><span th:text="${requests.assigned_employee}">Unassigned</span></td>
                             <td><span th:text="${requests.name}">TOR</span></td>
                             <td><span th:text="${requests.created_at}">12/12/2012</span></td>
+                            <td sec:authorize="hasRole('ROLE_ADMIN')"><span
+                                    th:text="${requests.updated_at}">12/12/2012</span></td>
                             <td><span th:text="${requests.status}">pending</span></td>
                             <td>
-                                <form th:action="@{/requests/admin/check/} + ${requests.RID}" method="get">
+                                <form th:action="@{/requests/admin/check/} + ${requests.RID}" method="get"
+                                    sec:authorize="hasRole('ROLE_ADMIN')">
                                     <button class="general-button button-1">Check</button>
+                                </form>
+                                <form th:action="@{/requests/admin/check/assign/} + ${requests.RID}" method="get"
+                                    sec:authorize="hasRole('ROLE_EMPLOYEE')"
+                                    th:if="${requests.assigned_employee}=='Unassigned'">
+                                    <button class="general-button button-1">Check</button>
+                                </form>
+                                <form th:action="@{/requests/admin/check/} + ${requests.RID}" method="get"
+                                    sec:authorize="hasRole('ROLE_EMPLOYEE')"
+                                    th:unless="${requests.assigned_employee}=='Unassigned'">
+                                    <button class="error-general-button button-1"
+                                        th:unless="${requests.assigned_employee}==${username}"
+                                        th:disabled="true">Check</button>
+                                    <button class="general-button button-1"
+                                        th:if="${requests.assigned_employee}==${username}">Check</button>
                                 </form>
                             </td>
                         </tr>
@@ -83,20 +151,40 @@
                         </span> </h3>
                     <table>
                         <tr class="h3">
+                            <th>Student Number</th>
+                            <th>Assigned Employee</th>
                             <th>Document Request</th>
                             <th>Date Requested</th>
+                            <th sec:authorize="hasRole('ROLE_ADMIN')">Last Updated</th>
                             <th>Request Status</th>
-                            <th>Check a Request</th>
-                            <th>Edit a Request</th>
+                            <th>Document Action</th>
                         </tr>
                         <tr class="body-1" th:each="requests: ${requests}">
                             <td><span th:text="${requests.student_number}">202212345</span></td>
+                            <td><span th:text="${requests.assigned_employee}">Unassigned</span></td>
                             <td><span th:text="${requests.name}">TOR</span></td>
                             <td><span th:text="${requests.created_at}">12/12/2012</span></td>
+                            <td sec:authorize="hasRole('ROLE_ADMIN')"><span
+                                    th:text="${requests.updated_at}">12/12/2012</span></td>
                             <td><span th:text="${requests.status}">pending</span></td>
                             <td>
-                                <form th:action="@{/requests/admin/check/} + ${requests.RID}" method="get">
+                                <form th:action="@{/requests/admin/check/} + ${requests.RID}" method="get"
+                                    sec:authorize="hasRole('ROLE_ADMIN')">
                                     <button class="general-button button-1">Check</button>
+                                </form>
+                                <form th:action="@{/requests/admin/check/assign/} + ${requests.RID}" method="get"
+                                    sec:authorize="hasRole('ROLE_EMPLOYEE')"
+                                    th:if="${requests.assigned_employee}=='Unassigned'">
+                                    <button class="general-button button-1">Check</button>
+                                </form>
+                                <form th:action="@{/requests/admin/check/} + ${requests.RID}" method="get"
+                                    sec:authorize="hasRole('ROLE_EMPLOYEE')"
+                                    th:unless="${requests.assigned_employee}=='Unassigned'">
+                                    <button class="error-general-button button-1"
+                                        th:unless="${requests.assigned_employee}==${username}"
+                                        th:disabled="true">Check1</button>
+                                    <button class="general-button button-1"
+                                        th:if="${requests.assigned_employee}==${username}">Check</button>
                                 </form>
                             </td>
                         </tr>

@@ -19,6 +19,7 @@
             <h2><a th:href="@{/}">Trinity University of Asia</a></h2>
         </div>
         <div class="header-right">
+            <span class="body-1 bold" th:text="'Today is '+${date}">Date</span>
             <form>
                 <!-- remove this during spring boot migration-->
                 <button class="reg-button button-1" sec:authorize="isAnonymous()" th:formaction=" @{/}">Sign In</button>

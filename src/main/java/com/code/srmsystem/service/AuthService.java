@@ -20,9 +20,13 @@ public interface AuthService {
 
     public String getUser();
 
-    public String redirect(String viewName);
+    public String redirect(String viewName, Model model);
+
+    public String redirectSpecial(String viewName, String email, Model model);
 
     public String requestRedirect();
 
     public ModelAndView displayUserNav(String viewName);
+
+    public String getDate();
 }

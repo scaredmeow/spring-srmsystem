@@ -16,6 +16,15 @@ public class Request {
     private String student_number;
     private String payment;
     private String comment;
+    private String assigned_employee;
+
+    public String getAssigned_employee() {
+        return assigned_employee;
+    }
+
+    public void setAssigned_employee(String assigned_employee) {
+        this.assigned_employee = assigned_employee;
+    }
 
     public String getPayment() {
         return payment;
@@ -45,7 +54,7 @@ public class Request {
     }
 
     public Request(int RID, int TID, int DID, Timestamp updated_at, String status, String name, String created_at,
-            String student_number, String payment, String comment) {
+            String student_number, String payment, String comment, String assigned_employee) {
         this.RID = RID;
         this.TID = TID;
         this.DID = DID;
@@ -56,6 +65,7 @@ public class Request {
         this.student_number = student_number;
         this.payment = payment;
         this.comment = comment;
+        this.assigned_employee = assigned_employee;
     }
 
     public int getRID() {
@@ -123,7 +133,8 @@ public class Request {
                 ", status='" + status + "\'" +
                 ", name='" + name + "\'" +
                 ", comment='" + comment + "\'" +
-                ", created_at='" + created_at + "\'" + "}";
+                ", created_at='" + created_at +
+                ", assigned_employee='" + assigned_employee + "\'" + "}";
     }
 
 }

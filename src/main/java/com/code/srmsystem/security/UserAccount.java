@@ -43,7 +43,7 @@ public class UserAccount implements UserDetails {
     @Override
     public String getUsername() {
         // TODO Auto-generated method stub
-        return this.user.getUsername();
+        return this.user.getEmail();
     }
 
     @Override
@@ -66,8 +66,12 @@ public class UserAccount implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        // TODO Auto-generated method stub
-        return true;
+        if (this.user.getIs_active() == 1)
+            return true;
+        else if (this.user.getIs_active() == 0)
+            return false;
+        else
+            return false;
     }
 
 }

@@ -35,6 +35,8 @@ header {
   display: flex;
   flex: 3;
   justify-content: right;
+  align-items: center;
+  gap: 1rem;
 }
 
 /* Footer */
@@ -94,6 +96,7 @@ main {
   flex-direction: row;
   flex: 1;
   margin: 1.5rem 7.5%;
+  /* min-height: 110%; */
 }
 
 section {
@@ -101,7 +104,7 @@ section {
   /* height: 100%; */
   background-color: var(--global-background-color);
   color: var(--global-foreground-color);
-  padding: rem;
+  padding: 2rem;
   /* margin: 2rem 0rem; */
 }
 
@@ -109,8 +112,15 @@ section {
 
 section,
 section .container,
-section .section-header,
 section .account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+section .section-header-main {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -154,32 +164,99 @@ aside h2 {
   margin-top: 1rem;
 }
 
-aside div.box-dashboard {
+main.main-dashboard {
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  height: 8.5%;
+  margin-bottom: 0;
+  gap: 1rem;
+  padding: 1rem 0rem 1rem 0rem;
+}
+
+main.main-dashboard h1 {
+  margin-bottom: 0rem;
+  color: var(--global-foreground-color);
+}
+
+main section.header-dashboard {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  background-color: var(--global-ground-color);
+  padding: 0;
+}
+
+main section.header-dashboard .box-dashboard {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  height: 8rem;
+  width: 10rem;
+  background-color: var(--global-foreground-color);
+  color: var(--global-background-color);
+}
+
+main section.header-dashboard button span.number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  width: 100%;
+}
+
+main section.header-dashboard button span.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+main section.header-dashboard .box-dashboard-1 {
+  height: 3rem;
+  width: 20rem;
+  background-color: var(--global-foreground-color);
+  color: var(--global-background-color);
+}
+
+main section.header-dashboard .box-dashboard-2 {
+  height: 3rem;
+  width: 20rem;
+  background-color: var(--global-foreground-color);
+  color: var(--global-background-color);
+}
+
+aside button.box-dashboard {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
   width: 80%;
   background-color: var(--global-background-color);
   margin-top: 0.5rem;
   color: var(--global-foreground-color);
 }
 
-aside div span.number {
+aside button span.number {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 2.25rem;
   font-weight: 700;
   width: 100%;
 }
 
-aside div span.text {
+aside button span.text {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 400;
 }
 
@@ -206,7 +283,6 @@ section .account button {
 }
 
 .icon-logo {
-  margin-top: 1rem;
   height: 5rem;
 }
 
@@ -252,7 +328,23 @@ section .proof-of-payment form {
   margin-top: 0.5rem;
 }
 
+section .proof-of-payment form button {
+  width: 50%;
+  /* margin-top: 1rem; */
+}
+
+section .proof-of-payment form .proof-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  /* margin-top: 1rem; */
+}
+
 /* Admin */
+
+h2.space {
+  margin-top: 3rem;
+}
 
 /* temporary */
 header h2 a {
@@ -264,9 +356,9 @@ header h2 a {
 section .student-request {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 85%;
   text-align: left;
-  margin-left: 7.5%;
+  /* margin-left: 7.5%; */
 }
 section .student-request .check-request {
   margin-bottom: 1rem;
