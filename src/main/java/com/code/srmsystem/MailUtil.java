@@ -46,8 +46,9 @@ public class MailUtil {
             msg.setFrom(new InternetAddress(myEmail));
             msg.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
             msg.setSubject("Activate your TUA SRM System account");
-            msg.setText("Hi kindly activate your TUA SRM System account through this link http://127.0.0.1:8080/"
-                    + key);
+            msg.setText(
+                    "Hi kindly activate your TUA SRM System account through this link https://tuasystem.herokuapp.com/"
+                            + key);
             return msg;
         } catch (AddressException e) {
             // TODO Auto-generated catch block
