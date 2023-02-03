@@ -22,7 +22,7 @@
                 <h4 th:if="${activate}">Your account is successfully activated!</h4>
                 <form class="account" th:action="@{/}" method="post" id="singin-form">
                     <h4 th:if="${param.error}">Invalid login credentials</h4>
-                    <input type="text" id="username" name="username" class="text-box body-2" placeholder="Username"
+                    <input type="text" id="username" name="username" class="text-box body-2" placeholder="Email Address"
                         required>
                     <input type="password" id="password" name="password" class="text-box body-2" placeholder="Password"
                         required>
