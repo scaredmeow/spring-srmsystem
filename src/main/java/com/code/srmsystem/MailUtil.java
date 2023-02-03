@@ -20,10 +20,9 @@ public class MailUtil {
         prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
-        // String myEmail = System.getenv("tuasrmsystem@gmail.com");
-        // String password = System.getenv("fjdstkdhwckhfsvh");
-        String myEmail = "tuasrmsystem@gmail.com";
-        String password = "fjdstkdhwckhfsvh";
+        String myEmail = System.getenv("EMAIL");
+        String password = System.getenv("PASSWORD");
+
         Session session = Session.getInstance(prop, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(myEmail, password);

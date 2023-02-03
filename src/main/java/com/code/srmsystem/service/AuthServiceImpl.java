@@ -23,8 +23,7 @@ import com.code.srmsystem.security.UserAccount;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    // String secretKey = System.getenv("SECRET_KEY");
-    String secretKey = "srmsystem";
+    String secretKey = System.getenv("SECRET_KEY");
 
     @Autowired
     private User user;

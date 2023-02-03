@@ -35,7 +35,6 @@ public class CustomErrorController implements ErrorController {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         model.addAttribute("username", this.userDao.findByEmail(this.authService.getUser()).getLast_name());
         model.addAttribute("date", this.authService.getDate());
-        model.addAttribute("username", this.authService.getUser());
         if (status != null) {
             Integer statusCode = Integer.valueOf(status.toString());
 
