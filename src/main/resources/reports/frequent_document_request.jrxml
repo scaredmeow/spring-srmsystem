@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.0.final using JasperReports Library version 6.12.1-ac0eebdb29e4c0985457bab279a6db744d661530  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="frequent_document_request" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c3db15c6-1fec-442c-9535-e970084a71c2">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<parameter name="Parameter1" class="java.lang.String"/>
+	<parameter name="Parameter2" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+	b.name as "DOCUMENT NAME",
+	count(*) as "TIMES REQUESTED"
+FROM
+	requests a,
+	documents b
+WHERE
+	a.DID = b.DID 
+	AND MONTH(a.updated_at) = $P{Parameter1}
+	AND YEAR(a.updated_at) = $P{Parameter2}
+GROUP BY
+	b.name
+ORDER BY
+	2
+DESC]]>
+	</queryString>
+	<field name="DOCUMENT NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DOCUMENT NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="documents"/>
+	</field>
+	<field name="TIMES REQUESTED" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="TIMES REQUESTED"/>
+	</field>
+	<group name="DOCUMENT NAME">
+		<groupExpression><![CDATA[$F{DOCUMENT NAME}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="90" y="20" width="350" height="30" uuid="3e540675-eabd-454c-9763-1321b1dadd2b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Algerian" size="20"/>
+				</textElement>
+				<text><![CDATA[Frequent DOCUMENT Request REPORT]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="0" width="200" height="21" uuid="9e2c871d-eed7-4a56-b5aa-91dbdbb84f5c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c96a784a-6858-4648-95f3-d12dd8160d58"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOCUMENT NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="199" height="21" uuid="e83f2f28-7f79-4c9e-834f-a24134714b90">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8d62714f-8160-445e-8547-0fa05bedd1c8"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIMES REQUESTED]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="80" y="0" width="200" height="20" uuid="83be177c-b0d1-4446-b0da-35afcdd27de3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c96a784a-6858-4648-95f3-d12dd8160d58"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{DOCUMENT NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="199" height="20" uuid="cae1ac7c-6993-4d45-8bcc-ed742ce6be5b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8d62714f-8160-445e-8547-0fa05bedd1c8"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{TIMES REQUESTED}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
