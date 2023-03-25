@@ -29,4 +29,6 @@ public interface AuthService {
     public ModelAndView displayUserNav(String viewName);
 
     public String getDate();
+    
+    public String generateReport();
 }

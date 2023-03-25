@@ -36,6 +36,11 @@ public class HomeController {
     public String signupPage(Model model) {
         return this.authService.redirect("signup", model);
     }
+    
+    @GetMapping(path = "/report")
+    public String reportPage(Model model) {
+        return this.authService.generateReport();
+    }
 
     @GetMapping(path = "/privacy")
     public String privacypage() {

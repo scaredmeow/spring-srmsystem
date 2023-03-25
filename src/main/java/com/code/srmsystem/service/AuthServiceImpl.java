@@ -13,12 +13,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 import java.time.ZoneId;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import com.code.srmsystem.MailUtil;
 import com.code.srmsystem.dao.UserDao;
 import com.code.srmsystem.model.User;
 import com.code.srmsystem.security.UserAccount;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.view.JasperViewer;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -100,6 +110,8 @@ public class AuthServiceImpl implements AuthService {
 
         return modelAndView;
     }
+    
+    
 
     @Override
     public String getUser() {
@@ -177,4 +189,24 @@ public class AuthServiceImpl implements AuthService {
         return "redirect:/requests";
 
     }
+
+	@Override
+	public String generateReport() {
+		Map<String, Object> map = new HashMap<>();
+        map.put("Parameter1", "11");
+        map.put("Parameter2", "2022");
+		try {
+		       Connection con =     DriverManager.getConnection("jdbc:mysql://localhost:3306/srmsystem","root","admin");
+		       String reportPath = "C:\\Dev\\EclipseWorkSpace\\srmsystem\\src\\main\\resources\\reports\\frequent_document_request.jrxml";
+		       JasperReport jr = JasperCompileManager.compileReport(reportPath);
+		       JasperPrint jp = JasperFillManager.fillReport(jr,map, con);
+		       JasperViewer.viewReport(jp);
+		       con.close();
+		       return "redirect:/";
+		} catch(Exception ex) {
+		    ex.printStackTrace();
+		}
+		
+		return "redirect:/";
+	}
 }
