@@ -110,8 +110,6 @@ public class AuthServiceImpl implements AuthService {
 
         return modelAndView;
     }
-    
-    
 
     @Override
     public String getUser() {
@@ -190,23 +188,23 @@ public class AuthServiceImpl implements AuthService {
 
     }
 
-	@Override
-	public String generateReport() {
-		Map<String, Object> map = new HashMap<>();
+    @Override
+    public String generateReport() {
+        Map<String, Object> map = new HashMap<>();
         map.put("Parameter1", "11");
         map.put("Parameter2", "2022");
-		try {
-		       Connection con =     DriverManager.getConnection("jdbc:mysql://localhost:3306/srmsystem","root","admin");
-		       String reportPath = "C:\\Dev\\EclipseWorkSpace\\srmsystem\\src\\main\\resources\\reports\\frequent_document_request.jrxml";
-		       JasperReport jr = JasperCompileManager.compileReport(reportPath);
-		       JasperPrint jp = JasperFillManager.fillReport(jr,map, con);
-		       JasperViewer.viewReport(jp);
-		       con.close();
-		       return "redirect:/";
-		} catch(Exception ex) {
-		    ex.printStackTrace();
-		}
-		
-		return "redirect:/";
-	}
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/srmsystem", "root", "admin");
+            String reportPath = "C:\\Users\\Neilc\\dev\\commission\\spring-srmsystem\\src\\main\\resources\\reports\\frequent_document_request.jrxml";
+            JasperReport jr = JasperCompileManager.compileReport(reportPath);
+            JasperPrint jp = JasperFillManager.fillReport(jr, map, con);
+            JasperViewer.viewReport(jp);
+            con.close();
+            return "redirect:/";
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return "redirect:/";
+    }
 }
